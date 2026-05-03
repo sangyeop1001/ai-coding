@@ -178,10 +178,14 @@ main > section {
   max-width: 600px;
 }
 
+/* 이 부분을 찾아서 아래 내용으로 덮어쓰세요 */
 .features {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  align-items: start; /* 핵심! 카드가 위쪽으로 착 붙어서 길어지지 않음 */
+  min-height: auto !important; /* 100vh 강제 적용 해제 */
+  padding: 4rem 0 !important;
 }
 
 .features article {
