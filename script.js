@@ -27,6 +27,24 @@ const aiCategories = [
         features: ['코드 자동완성', '다언어 지원', '실시간 제안', 'IDE 통합'], strengths: '개발 생산성 대폭 향상',
         pricing: { free: '학생용', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/200px-Visual_Studio_Code_1.35_icon.svg.png',
         subscribeUrl: 'https://github.com/features/copilot', rating: 4.6
+      },
+      {
+        id: 5, name: 'Notion AI', description: '노트 작성과 문서 자동 생성, 회의 요약에 특화된 생산성 AI.',
+        features: ['문서 작성', '요약', '아이디어 정리', '템플릿 지원'], strengths: '업무 흐름에 자연스럽게 녹아드는 통합성',
+        pricing: { free: '제한적', pro: '$8/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Notion-logo.svg/200px-Notion-logo.svg.png',
+        subscribeUrl: 'https://www.notion.so/product/ai', rating: 4.4
+      },
+      {
+        id: 6, name: 'Jasper', description: '마케팅 콘텐츠와 광고 문구 생성에 강력한 텍스트 AI.',
+        features: ['광고 문구', '블로그 글', 'SEO 콘텐츠', '브랜드 음성 유지'], strengths: '신속한 캠페인 콘텐츠 제작',
+        pricing: { free: '체험', pro: '$29/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Jasper_logo.svg/200px-Jasper_logo.svg.png',
+        subscribeUrl: 'https://www.jasper.ai/', rating: 4.3
+      },
+      {
+        id: 9, name: 'Grammarly', description: '문법 검사와 스타일 개선을 자동으로 도와주는 AI 라이팅 도우미.',
+        features: ['문법 교정', '스타일 가이드', '플러그인 통합', '단어 선택 개선'], strengths: '정확하고 자연스러운 문서 품질 향상',
+        pricing: { free: '기본', pro: '$12/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Grammarly_Logo.svg/200px-Grammarly_Logo.svg.png',
+        subscribeUrl: 'https://www.grammarly.com/', rating: 4.5
       }
     ]
   },
@@ -40,6 +58,18 @@ const aiCategories = [
         features: ['고품질 이미지', '예술적 스타일', 'Discord 통합'], strengths: '최고 수준의 이미지 품질',
         pricing: { free: '제한적', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.svg/200px-Midjourney_Emblem.svg.png',
         subscribeUrl: 'https://www.midjourney.com/', rating: 4.9
+      },
+      {
+        id: 10, name: 'Stable Diffusion', description: '오픈소스 이미지 생성 모델. 커스터마이징과 로컬 실행 지원.',
+        features: ['오픈소스', '로컬 실행', '모델 커스터마이즈', '빠른 생성'], strengths: '자유도가 높고 가격 부담이 적음',
+        pricing: { free: '오픈소스', pro: '맞춤형 요금' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Stable_Diffusion_logo.svg/200px-Stable_Diffusion_logo.svg.png',
+        subscribeUrl: 'https://stability.ai/', rating: 4.2
+      },
+      {
+        id: 11, name: 'Runway', description: '비디오와 이미지 생성에 최적화된 크리에이티브 AI 플랫폼.',
+        features: ['비디오 편집', '모션 그래픽', '이미지 생성', '브랜딩 템플릿'], strengths: '영상 제작 워크플로우에 바로 적용 가능',
+        pricing: { free: '제한적', pro: '$12/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Runway_%28software%29_logo.svg/200px-Runway_%28software%29_logo.svg.png',
+        subscribeUrl: 'https://runwayml.com/', rating: 4.4
       },
       {
         id: 8, name: 'DALL-E 3', description: 'OpenAI의 이미지 생성 AI. 텍스트로부터 정확한 이미지 생성.',
