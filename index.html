@@ -28,9 +28,9 @@
     <section class="hero" id="home">
       <div class="hero-copy container">
         <p class="eyebrow">AI 구독 서비스 비교</p>
-        <h1>최고의 AI를 선택하세요</h1>
-        <p>ChatGPT, Claude, Gemini 등 인기 AI 서비스의 특징, 가격, 성능을 비교하고 최적의 구독 플랜을 찾아보세요.</p>
-        <a class="primary-btn" href="#comparison">서비스 비교하기</a>
+        <h1>어떤 AI가<br>당신에게 맞을까요?</h1>
+        <p>ChatGPT, Claude, Gemini 등 인기 AI 서비스의 특징, 가격, 성능을 비교하고<br>최적의 구독 플랜을 찾아보세요. 전문가 리뷰와 사용자 평가로<br>스마트한 선택을 도와드립니다.</p>
+        <a class="primary-btn" href="#comparison">지금 비교하기</a>
       </div>
       <div class="hero-image">
         <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="AI Technology" />
@@ -39,16 +39,16 @@
 
     <section class="features container">
       <article>
-        <h3>📊 상세 비교</h3>
-        <p>각 AI 서비스의 장단점, 사용성, 성능을 객관적으로 분석</p>
+        <h3>📊 객관적 비교</h3>
+        <p>각 AI 서비스의 장단점, 사용성, 성능을<br>전문가의 시각으로 분석해드립니다</p>
       </article>
       <article>
         <h3>💰 가격 최적화</h3>
-        <p>가성비 좋은 구독 플랜을 추천해드립니다</p>
+        <p>무료 플랜부터 프리미엄까지<br>가장 경제적인 구독 플랜을 추천합니다</p>
       </article>
       <article>
         <h3>🔗 바로 구독</h3>
-        <p>비교 후 바로 해당 서비스로 이동할 수 있습니다</p>
+        <p>비교 후 바로 해당 서비스로 이동하여<br>간편하게 구독을 시작하세요</p>
       </article>
     </section>
 
@@ -70,33 +70,48 @@
 
     <section class="info-block container" id="recommend">
       <div>
-        <h2>어떤 AI가 당신에게 맞을까요?</h2>
-        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다. 텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서 최고의 AI를 만나보세요.</p>
-      </div>
-      <div class="info-cards">
-        <article>
-          <h3>💬 텍스트 생성</h3>
-          <p>ChatGPT, Claude, Gemini 중 상황에 맞는 AI 선택</p>
-        </article>
-        <article>
-          <h3>🎨 이미지 생성</h3>
-          <p>Midjourney, DALL-E, Stable Diffusion 비교</p>
-        </article>
-        <article>
-          <h3>💻 코딩 지원</h3>
-          <p>GitHub Copilot, Claude, ChatGPT 코드 생성 능력 비교</p>
-        </article>
+        <h2>어떤 AI가<br>필요하신가요?</h2>
+        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다.<br>텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서<br>최고의 AI를 만나보세요.</p>
+        <div class="recommendation-cards">
+          <div class="rec-card">
+            <h4>✍️ 텍스트 작업</h4>
+            <p>글쓰기, 번역, 요약, 분석</p>
+            <small>ChatGPT, Claude, Gemini 추천</small>
+          </div>
+          <div class="rec-card">
+            <h4>🎨 이미지 생성</h4>
+            <p>디자인, 일러스트, 사진 편집</p>
+            <small>Midjourney, DALL-E, Stable Diffusion</small>
+          </div>
+          <div class="rec-card">
+            <h4>💻 개발 지원</h4>
+            <p>코딩, 디버깅, 코드 리뷰</p>
+            <small>GitHub Copilot, Tabnine</small>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <aside class="subscription-panel" id="subscription-panel">
-    <div class="cart-header">
-      <h3>구독 추천</h3>
-      <button id="close-subscription">닫기</button>
+    <div class="subscription-header">
+      <div class="panel-title">
+        <h3>구독 상세 정보</h3>
+        <p>선택한 AI 서비스의 자세한 정보를 확인하세요</p>
+      </div>
+      <button id="close-subscription" class="close-btn" aria-label="닫기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
     <div class="subscription-content" id="subscription-content">
-      <p>관심 있는 AI 서비스를 선택하면 구독 링크로 바로 이동합니다.</p>
+      <div class="empty-state">
+        <div class="empty-icon">🤖</div>
+        <h4>AI 서비스를 선택하세요</h4>
+        <p>관심 있는 AI 서비스의 '구독하기' 버튼을 클릭하면<br>자세한 정보와 구독 링크를 확인할 수 있습니다.</p>
+      </div>
     </div>
   </aside>
 
