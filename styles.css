@@ -1,11 +1,12 @@
 :root {
-  --bg: #f7f6fb;
-  --surface: #ffffff;
-  --primary: #4b6cf7;
-  --primary-strong: #3345d8;
-  --text: #202030;
-  --muted: #666d85;
-  --border: #e6e8f5;
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --primary: #6366f1;
+  --primary-strong: #4f46e5;
+  --text: #ffffff;
+  --muted: #a1a1aa;
+  --border: #374151;
+  --accent: #f59e0b;
 }
 
 * {
@@ -110,11 +111,13 @@ img {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: center;
   padding: 6rem 0 8rem;
   min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .menu-toggle {
   display: none;
@@ -164,6 +167,10 @@ img {
   text-decoration: underline;
 }
 
+.hero-copy {
+  text-align: center;
+}
+
 .hero-copy .eyebrow {
   margin: 0 0 1rem;
   font-size: 0.95rem;
@@ -173,23 +180,38 @@ img {
 }
 
 .hero-copy h1 {
-  margin: 0;
-  font-size: clamp(2.5rem, 4vw, 4rem);
-  line-height: 1.05;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
 }
 
 .hero-copy p {
-  margin: 1.5rem 0 2rem;
-  max-width: 44rem;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  margin: 0 0 2.5rem 0;
   color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.75;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
   border-radius: 1.5rem;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(49, 66, 133, 0.12);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 .features {
@@ -298,9 +320,9 @@ img {
 }
 
 .product-card.ai-service-card .card-content {
-  padding: 1.25rem;
+  padding: 1rem;
   display: grid;
-  gap: 0.9rem;
+  gap: 0.7rem;
   flex: 1;
 }
 
@@ -511,13 +533,14 @@ img {
   right: -420px;
   width: 400px;
   height: 100vh;
-  background: #ffffff;
-  box-shadow: -20px 0 70px rgba(29, 36, 65, 0.16);
+  background: linear-gradient(135deg, var(--surface) 0%, #2a2a2a 100%);
+  box-shadow: -20px 0 70px rgba(0, 0, 0, 0.5);
   padding: 1.5rem;
   transition: right 0.3s ease;
   z-index: 20;
   display: flex;
   flex-direction: column;
+  border-left: 1px solid var(--border);
 }
 
 .subscription-panel.open {
@@ -530,7 +553,9 @@ img {
   align-items: flex-start;
   padding: 1.5rem;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, #1a1a1a 100%);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .panel-title h3 {
