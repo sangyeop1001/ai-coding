@@ -202,6 +202,38 @@ img {
   gap: 1.5rem;
 }
 
+#ai-services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
+.category-section {
+  grid-column: 1 / -1;
+  padding: 2rem 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.category-section h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+  color: var(--text);
+}
+
+.category-section p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  grid-column: 1 / -1;
+}
+
 .product-card {
   background: var(--surface);
   border-radius: 1.5rem;
@@ -490,6 +522,18 @@ img {
 
 .pricing-table tr:hover {
   background: #f9fafb;
+}
+
+.features-cell {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.rating-cell {
+  text-align: center;
+  font-weight: 600;
+  color: #dc2626;
 }
 
 @media (max-width: 860px) {
