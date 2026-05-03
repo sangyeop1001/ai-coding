@@ -3,98 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>쇼핑몰 사이트</title>
+  <title>AI 구독 비교 - 최고의 AI 서비스를 찾아보세요</title>
+  <meta name="description" content="ChatGPT, Claude, Gemini 등 주요 AI 구독 서비스 비교 분석 및 구독 링크 제공">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner container">
-      <div class="brand">ShopNova</div>
+      <div class="brand">AI Compare</div>
       <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기">
         ☰
       </button>
       <nav class="main-nav" id="main-nav">
         <a href="#home">홈</a>
-        <a href="#products">상품</a>
-        <a href="#about">소개</a>
-        <a href="#contact">문의</a>
+        <a href="#comparison">서비스 비교</a>
+        <a href="#pricing">가격 비교</a>
+        <a href="#recommend">추천</a>
       </nav>
-      <button class="cart-button" id="cart-button">장바구니 (<span id="cart-count">0</span>)</button>
+      <button class="cart-button" id="subscription-btn">구독 시작하기</button>
     </div>
   </header>
 
   <main>
     <section class="hero" id="home">
       <div class="hero-copy container">
-        <p class="eyebrow">신상품 출시</p>
-        <h1>따뜻하고 스타일리시한 데일리 상품</h1>
-        <p>간편한 쇼핑, 빠른 배송, 믿을 수 있는 품질의 라이프스타일 컬렉션.</p>
-        <a class="primary-btn" href="#products">지금 쇼핑하기</a>
+        <p class="eyebrow">AI 구독 서비스 비교</p>
+        <h1>최고의 AI를 선택하세요</h1>
+        <p>ChatGPT, Claude, Gemini 등 인기 AI 서비스의 특징, 가격, 성능을 비교하고 최적의 구독 플랜을 찾아보세요.</p>
+        <a class="primary-btn" href="#comparison">서비스 비교하기</a>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="쇼핑 이미지" />
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="AI Technology" />
       </div>
     </section>
 
     <section class="features container">
       <article>
-        <h3>무료 배송</h3>
-        <p>50,000원 이상 주문 시 무료 배송.</p>
+        <h3>📊 상세 비교</h3>
+        <p>각 AI 서비스의 장단점, 사용성, 성능을 객관적으로 분석</p>
       </article>
       <article>
-        <h3>빠른 환불</h3>
-        <p>간편한 7일 내 환불 보장.</p>
+        <h3>💰 가격 최적화</h3>
+        <p>가성비 좋은 구독 플랜을 추천해드립니다</p>
       </article>
       <article>
-        <h3>고객 지원</h3>
-        <p>365일 실시간 채팅 지원.</p>
+        <h3>🔗 바로 구독</h3>
+        <p>비교 후 바로 해당 서비스로 이동할 수 있습니다</p>
       </article>
     </section>
 
-    <section class="product-list container" id="products">
+    <section class="product-list container" id="comparison">
       <div class="section-header">
-        <h2>추천 상품</h2>
-        <p>트렌디한 인기 상품을 만나보세요.</p>
+        <h2>AI 서비스 비교</h2>
+        <p>주요 AI 구독 서비스의 특징과 장단점을 비교해보세요.</p>
       </div>
-      <div class="products" id="product-grid"></div>
+      <div class="products" id="ai-services-grid"></div>
     </section>
 
-    <section class="info-block container" id="about">
+    <section class="pricing-table container" id="pricing">
+      <div class="section-header">
+        <h2>가격 비교</h2>
+        <p>각 서비스의 구독 요금제를 한눈에 비교하세요.</p>
+      </div>
+      <div class="pricing-grid" id="pricing-comparison"></div>
+    </section>
+
+    <section class="info-block container" id="recommend">
       <div>
-        <h2>ShopNova와 함께하는 편리한 쇼핑</h2>
-        <p>심플하고 세련된 디자인으로 누구나 쉽게 사용할 수 있는 쇼핑 경험을 제공합니다. 매 시즌 새로운 스타일을 제안하며, 믿을 수 있는 품질과 빠른 배송을 지향합니다.</p>
+        <h2>어떤 AI가 당신에게 맞을까요?</h2>
+        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다. 텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서 최고의 AI를 만나보세요.</p>
       </div>
       <div class="info-cards">
         <article>
-          <h3>프리미엄 선택</h3>
-          <p>꼼꼼히 선별한 상품을 합리적인 가격으로 제공합니다.</p>
+          <h3>💬 텍스트 생성</h3>
+          <p>ChatGPT, Claude, Gemini 중 상황에 맞는 AI 선택</p>
         </article>
         <article>
-          <h3>손쉬운 결제</h3>
-          <p>다양한 결제 옵션으로 안전하게 결제하세요.</p>
+          <h3>🎨 이미지 생성</h3>
+          <p>Midjourney, DALL-E, Stable Diffusion 비교</p>
+        </article>
+        <article>
+          <h3>💻 코딩 지원</h3>
+          <p>GitHub Copilot, Claude, ChatGPT 코드 생성 능력 비교</p>
         </article>
       </div>
     </section>
   </main>
 
-  <aside class="cart-panel" id="cart-panel">
+  <aside class="subscription-panel" id="subscription-panel">
     <div class="cart-header">
-      <h3>장바구니</h3>
-      <button id="close-cart">닫기</button>
+      <h3>구독 추천</h3>
+      <button id="close-subscription">닫기</button>
     </div>
-    <div class="cart-items" id="cart-items"></div>
-    <div class="cart-footer">
-      <div class="total-text">총 합계: <strong id="cart-total">0</strong>원</div>
-      <button class="primary-btn" id="checkout-button">결제하기</button>
+    <div class="subscription-content" id="subscription-content">
+      <p>관심 있는 AI 서비스를 선택하면 구독 링크로 바로 이동합니다.</p>
     </div>
   </aside>
 
   <footer class="site-footer" id="contact">
     <div class="container footer-inner">
-      <p>© 2026 ShopNova. 문의: help@shopnova.kr</p>
+      <p>© 2026 AI Compare. AI 서비스 비교 및 추천 플랫폼</p>
       <div class="footer-links">
-        <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer">GitHub 저장소</a>
-        <a href="https://your-username.github.io/your-repo/" target="_blank" rel="noopener noreferrer">사이트 바로가기</a>
+        <a href="https://github.com/sangyeop1001/ai-coding" target="_blank" rel="noopener noreferrer">GitHub 저장소</a>
+        <a href="https://ai-coding-tau.vercel.app/" target="_blank" rel="noopener noreferrer">사이트 바로가기</a>
       </div>
     </div>
   </footer>

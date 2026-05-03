@@ -1,53 +1,84 @@
-const products = [
+const aiServices = [
   {
     id: 1,
-    name: '모던 니트 스웨터',
-    description: '부드러운 촉감과 여유 있는 핏을 자랑하는 니트.',
-    price: 47000,
-    image: 'https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80',
+    name: 'ChatGPT',
+    description: 'OpenAI의 대표 AI 모델. 텍스트 생성, 코드 작성, 분석 등 다양한 분야에서 뛰어난 성능.',
+    features: ['텍스트 생성', '코드 작성', '분석/요약', '다국어 지원'],
+    strengths: '가장 대중적이고 안정적인 성능',
+    weaknesses: '실시간 정보 제한',
+    pricing: { free: '제한적', pro: '$20/월' },
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://chat.openai.com/',
+    rating: 4.8
   },
   {
     id: 2,
-    name: '데일리 숄더백',
-    description: '간편하게 들기 좋은 미니멀 디자인 백.',
-    price: 32000,
-    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80',
+    name: 'Claude',
+    description: 'Anthropic의 안전하고 유능한 AI. 긴 텍스트 처리와 분석에 강점.',
+    features: ['긴 텍스트 처리', '안전한 응답', '분석 전문성', '연구용 최적화'],
+    strengths: '안전성과 정확성',
+    weaknesses: '창의성에서 다소 부족',
+    pricing: { free: '제한적', pro: '$20/월' },
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://claude.ai/',
+    rating: 4.7
   },
   {
     id: 3,
-    name: '컨템포러리 운동화',
-    description: '경량 쿠셔닝으로 편안한 착화감을 제공.',
-    price: 68000,
-    image: 'https://images.unsplash.com/photo-1528701800489-20ed7f9a0157?auto=format&fit=crop&w=800&q=80',
+    name: 'Gemini',
+    description: 'Google의 멀티모달 AI. 텍스트, 이미지, 동영상 모두 처리 가능.',
+    features: ['멀티모달', '실시간 검색', 'Google 통합', '무료 사용량 많음'],
+    strengths: '무료 플랜이 풍부하고 통합성 좋음',
+    weaknesses: '일부 기능 제한적',
+    pricing: { free: '광범위', pro: '$10/월' },
+    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://gemini.google.com/',
+    rating: 4.5
   },
   {
     id: 4,
-    name: '모던 워치',
-    description: '심플한 다이얼과 세련된 스트랩.',
-    price: 91000,
-    image: 'https://images.unsplash.com/photo-1511730548620-29a3f6a0ad75?auto=format&fit=crop&w=800&q=80',
+    name: 'GitHub Copilot',
+    description: '코딩 전문 AI. 실시간 코드 제안과 자동 완성 기능 제공.',
+    features: ['코드 자동완성', '다언어 지원', '실시간 제안', 'IDE 통합'],
+    strengths: '개발 생산성 향상',
+    weaknesses: '코딩 외 용도로는 부적합',
+    pricing: { free: '학생용', pro: '$10/월' },
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://github.com/features/copilot',
+    rating: 4.6
   },
   {
     id: 5,
-    name: '포근한 담요',
-    description: '집에서 즐기는 편안한 휴식용 담요.',
-    price: 26000,
-    image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80',
+    name: 'Midjourney',
+    description: '고품질 이미지 생성 AI. 예술적이고 창의적인 이미지 생성에 특화.',
+    features: ['고품질 이미지', '예술적 스타일', 'Discord 통합', '커뮤니티 지원'],
+    strengths: '이미지 품질이 뛰어남',
+    weaknesses: '텍스트 생성 불가',
+    pricing: { free: '제한적', pro: '$10/월' },
+    image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://www.midjourney.com/',
+    rating: 4.9
   },
   {
     id: 6,
-    name: '럭셔리 향수',
-    description: '우아한 잔향이 오래도록 지속됩니다.',
-    price: 78000,
-    image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80',
+    name: 'DALL-E',
+    description: 'OpenAI의 이미지 생성 AI. 텍스트로부터 정확한 이미지 생성.',
+    features: ['정확한 이미지 생성', '다양한 스타일', '편집 기능', 'API 지원'],
+    strengths: '텍스트-이미지 변환 정확도 높음',
+    weaknesses: 'Midjourney보다 느림',
+    pricing: { free: '제한적', pro: '$15/월' },
+    image: 'https://images.unsplash.com/photo-1686191128892-3b90e93f1b6c?auto=format&fit=crop&w=400&q=80',
+    subscribeUrl: 'https://openai.com/dall-e-3/',
+    rating: 4.4
   },
 ];
 
-const cart = {};
-const productGrid = document.getElementById('product-grid');
-const cartButton = document.getElementById('cart-button');
-const cartPanel = document.getElementById('cart-panel');
-const closeCart = document.getElementById('close-cart');
+const subscriptionPanel = document.getElementById('subscription-panel');
+const closeSubscription = document.getElementById('close-subscription');
+const subscriptionContent = document.getElementById('subscription-content');
+const subscriptionBtn = document.getElementById('subscription-btn');
+const aiServicesGrid = document.getElementById('ai-services-grid');
+const pricingComparison = document.getElementById('pricing-comparison');
 const cartItems = document.getElementById('cart-items');
 const cartCount = document.getElementById('cart-count');
 const cartTotal = document.getElementById('cart-total');
@@ -59,74 +90,97 @@ function formatPrice(price) {
   return price.toLocaleString('ko-KR');
 }
 
-function renderProducts() {
-  productGrid.innerHTML = '';
-  products.forEach((product) => {
+function renderAIServices() {
+  aiServicesGrid.innerHTML = '';
+  aiServices.forEach((service) => {
     const card = document.createElement('article');
-    card.className = 'product-card';
+    card.className = 'product-card ai-service-card';
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" />
+      <img src="${service.image}" alt="${service.name}" />
       <div class="card-content">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <div class="price">${formatPrice(product.price)}원</div>
-        <button data-id="${product.id}">장바구니에 추가</button>
+        <div class="service-header">
+          <h3>${service.name}</h3>
+          <div class="rating">⭐ ${service.rating}</div>
+        </div>
+        <p>${service.description}</p>
+        <div class="features">
+          ${service.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+        </div>
+        <div class="service-info">
+          <div class="strengths">✅ ${service.strengths}</div>
+          <div class="pricing">💰 ${service.pricing.pro}</div>
+        </div>
+        <button data-id="${service.id}" class="subscribe-btn">구독하기</button>
       </div>
     `;
 
-    const button = card.querySelector('button');
-    button.addEventListener('click', () => addToCart(product.id));
-    productGrid.appendChild(card);
+    const button = card.querySelector('.subscribe-btn');
+    button.addEventListener('click', () => showSubscriptionInfo(service));
+    aiServicesGrid.appendChild(card);
   });
 }
 
-function addToCart(productId) {
-  cart[productId] = cart[productId] ? cart[productId] + 1 : 1;
-  updateCart();
-  cartPanel.classList.add('open');
-}
-
-function updateCart() {
-  cartItems.innerHTML = '';
-  let totalCount = 0;
-  let totalPrice = 0;
-
-  Object.entries(cart).forEach(([id, quantity]) => {
-    const product = products.find((item) => item.id === Number(id));
-    const itemTotal = product.price * quantity;
-    totalCount += quantity;
-    totalPrice += itemTotal;
-
-    const itemEl = document.createElement('div');
-    itemEl.className = 'cart-item';
-    itemEl.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" />
-      <div class="cart-item-details">
-        <h4>${product.name}</h4>
-        <span>${quantity}개 • ${formatPrice(itemTotal)}원</span>
+function showSubscriptionInfo(service) {
+  subscriptionContent.innerHTML = `
+    <div class="subscription-details">
+      <h4>${service.name} 구독 정보</h4>
+      <div class="service-rating">⭐ ${service.rating}/5.0</div>
+      <div class="pricing-info">
+        <p><strong>가격:</strong> ${service.pricing.pro}</p>
+        <p><strong>무료 플랜:</strong> ${service.pricing.free}</p>
       </div>
-    `;
-
-    cartItems.appendChild(itemEl);
-  });
-
-  cartCount.textContent = totalCount;
-  cartTotal.textContent = formatPrice(totalPrice);
-
-  if (totalCount === 0) {
-    cartItems.innerHTML = '<p>장바구니에 상품이 없습니다.</p>';
-  }
+      <div class="features-list">
+        <h5>주요 기능:</h5>
+        <ul>
+          ${service.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="pros-cons">
+        <div class="pros">
+          <h5>장점:</h5>
+          <p>${service.strengths}</p>
+        </div>
+        <div class="cons">
+          <h5>단점:</h5>
+          <p>${service.weaknesses}</p>
+        </div>
+      </div>
+      <a href="${service.subscribeUrl}" target="_blank" class="primary-btn full-width">지금 구독하기</a>
+    </div>
+  `;
+  subscriptionPanel.classList.add('open');
 }
 
-cartButton.addEventListener('click', () => cartPanel.classList.toggle('open'));
-closeCart.addEventListener('click', () => cartPanel.classList.remove('open'));
-checkoutButton.addEventListener('click', () => {
-  if (Object.keys(cart).length === 0) {
-    alert('장바구니에 상품을 먼저 담아주세요.');
-    return;
-  }
-  alert('결제가 준비되었습니다!');
-});
+function renderPricingComparison() {
+  pricingComparison.innerHTML = `
+    <div class="pricing-table-container">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>서비스</th>
+            <th>무료 플랜</th>
+            <th>프리미엄</th>
+            <th>주요 특징</th>
+            <th>구독</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${aiServices.map(service => `
+            <tr>
+              <td><strong>${service.name}</strong></td>
+              <td>${service.pricing.free}</td>
+              <td>${service.pricing.pro}</td>
+              <td>${service.features.slice(0, 2).join(', ')}</td>
+              <td><button onclick="window.open('${service.subscribeUrl}', '_blank')" class="mini-subscribe-btn">구독</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+closeSubscription.addEventListener('click', () => subscriptionPanel.classList.remove('open'));
 
 menuToggle.addEventListener('click', () => {
   mainNav.classList.toggle('open');
@@ -136,5 +190,5 @@ mainNav.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => mainNav.classList.remove('open'));
 });
 
-renderProducts();
-updateCart();
+renderAIServices();
+renderPricingComparison();
