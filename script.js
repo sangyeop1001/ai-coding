@@ -357,7 +357,9 @@ function renderAIServices() {
       const card = document.createElement('article');
       card.className = 'product-card ai-service-card';
       card.innerHTML = `
-        <img src="${service.image}" alt="${service.name}" onerror="this.src='https://via.placeholder.com/400x300?text=${service.name}'" />
+        <div class="image-container">
+          <img src="${service.image}" alt="${service.name}" class="service-image" />
+        </div>
         <div class="card-content">
           <div class="service-header">
             <h3>${service.name}</h3>
