@@ -31,6 +31,18 @@ img { max-width: 100%; display: block; }
 }
 .header-inner { display: flex; gap: 1rem; align-items: center; justify-content: space-between; padding: 1rem 0; }
 .brand { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ★ 문제의 흰색 버튼 기본적으로 완전 숨김! ★ */
+.menu-toggle {
+  display: none; 
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+
 .main-nav { display: flex; gap: 2rem; }
 .main-nav a { color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
 .main-nav a:hover { color: var(--text); }
@@ -77,7 +89,7 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
 .subscribe-btn { background: rgba(99,102,241,0.1); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); padding: 0.8rem; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; margin-top: 0.5rem; }
 .subscribe-btn:hover { background: var(--primary-strong); color: white; }
 
-/* ★★★ 비교 UI 디자인 (드롭다운 & 결과창) ★★★ */
+/* 비교 UI 디자인 */
 .compare-ui-container {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -95,28 +107,13 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
   margin-top: 1.5rem;
 }
 
-.select-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
+.select-group { display: flex; flex-direction: column; gap: 0.8rem; }
 .select-group.full-width { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
 .select-group label { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 
-/* 세련된 셀렉트 박스 */
 .select-wrapper { position: relative; }
-.select-wrapper::after {
-  content: "▼"; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-  color: var(--muted); pointer-events: none; font-size: 0.8rem;
-}
-.custom-select {
-  appearance: none; -webkit-appearance: none;
-  background: #18181b; color: white;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 1rem 1.5rem; border-radius: 12px; width: 100%;
-  font-size: 1rem; font-family: inherit; cursor: pointer; outline: none;
-  transition: border-color 0.2s;
-}
+.select-wrapper::after { content: "▼"; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; font-size: 0.8rem; }
+.custom-select { appearance: none; -webkit-appearance: none; background: #18181b; color: white; border: 1px solid rgba(255,255,255,0.15); padding: 1rem 1.5rem; border-radius: 12px; width: 100%; font-size: 1rem; font-family: inherit; cursor: pointer; outline: none; transition: border-color 0.2s; }
 .custom-select:focus { border-color: var(--primary); }
 
 .vs-badge {
@@ -127,27 +124,9 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
   margin-bottom: 0.5rem; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
 }
 
-/* 화면에 바로 뜨는 비교 결과창 */
-.compare-result-container {
-  margin-top: 3rem;
-  padding-top: 3rem;
-  border-top: 1px dashed rgba(255,255,255,0.1);
-}
-
-.compare-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.compare-box {
-  background: #121214;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 1rem;
-  padding: 2rem;
-  display: flex; flex-direction: column; gap: 1.5rem;
-}
-
+.compare-result-container { margin-top: 3rem; padding-top: 3rem; border-top: 1px dashed rgba(255,255,255,0.1); }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.compare-box { background: #121214; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
 .compare-box img { height: 40px; object-fit: contain; margin-bottom: 1rem; }
 .compare-box h3 { margin: 0; font-size: 1.5rem; }
 .compare-section h4 { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.5rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;}
@@ -174,10 +153,13 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
 .subscription-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem;}
 .close-btn { background: none; border: none; color: white; cursor: pointer; }
 
+/* 모바일 화면일 때만 메뉴 토글 버튼 표시 */
 @media (max-width: 768px) {
+  .menu-toggle { display: block; }
   .compare-slots { grid-template-columns: 1fr; text-align: center; }
   .vs-badge { margin: 1rem auto; }
   .compare-grid { grid-template-columns: 1fr; }
   .header-inner { flex-wrap: wrap; }
-  .main-nav { display: none; }
+  .main-nav { display: none; width: 100%; flex-direction: column; text-align: center; margin-top: 1rem; }
+  .main-nav.open { display: flex; }
 }
