@@ -23,7 +23,7 @@ git push -u origin main
 
 ## 사이트 주소
 
-(https://your-username.github.io/your-repo/`](https://ai-coding-tau.vercel.app/#home)
+https://ai-coding-tau.vercel.app/#home
 
 ## 파일 설명
 
