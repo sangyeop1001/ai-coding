@@ -88,19 +88,6 @@ const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
 const topSubBtn = document.getElementById('subscription-btn'); // 상단 헤더 버튼
 
-// 모달(팝업) 관련 요소
-const modalOverlay = document.getElementById('modal-overlay');
-const closeModalBtn = document.getElementById('close-modal');
-const subscriptionContent = document.getElementById('subscription-content');
-
-// 비교 모달 관련 요소
-const compareOverlay = document.getElementById('compare-overlay');
-const closeCompareBtn = document.getElementById('close-compare');
-const comparisonContent = document.getElementById('comparison-content');
-
-// 비교 선택 상태
-let selectedServices = [];
-
 // 1. AI 서비스 카드 렌더링
 function renderAIServices() {
   if (!aiServicesGrid) return;
@@ -135,20 +122,13 @@ function renderAIServices() {
             <div class="strengths">✅ ${service.strengths}</div>
             <div class="pricing">💰 ${service.pricing.pro}</div>
           </div>
-          <div style="display: flex; gap: 0.5rem;">
-            <button class="subscribe-btn" style="flex: 1;">구독하기</button>
-            <button class="compare-btn" data-service-id="${service.id}" data-service-name="${service.name}" style="flex: 0.3; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; font-size: 1.2rem;">✓</button>
-          </div>
+          <button class="subscribe-btn">구독하기</button>
         </div>
       `;
 
       // ★ 카드 안의 '구독하기' 버튼을 누르면 팝업(모달) 띄우기 연결!
       const btn = card.querySelector('.subscribe-btn');
       btn.addEventListener('click', () => showModal(service));
-      
-      // ★ 카드 안의 '비교' 버튼 (✓) 클릭 이벤트
-      const compareBtn = card.querySelector('.compare-btn');
-      compareBtn.addEventListener('click', () => toggleServiceSelection(service, compareBtn));
       
       serviceGrid.appendChild(card);
     });
@@ -160,174 +140,239 @@ function renderAIServices() {
 // 2. 가격 비교 테이블 렌더링
 function renderPricingComparison() {
   if (!pricingComparison) return;
-  const allServices = aiCategories.flatMap(cat => cat.services);
   
   pricingComparison.innerHTML = `
-    <div class="pricing-table-container">
-      <table class="pricing-table">
-        <thead>
-          <tr>
-            <th>서비스</th>
-            <th>무료 플랜</th>
-            <th>프리미엄</th>
-            <th>주요 특징</th>
-            <th>구독</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${allServices.map(service => `
-            <tr>
-              <td><strong>${service.name}</strong></td>
-              <td>${service.pricing.free}</td>
-              <td style="color: var(--primary-strong); font-weight: bold;">${service.pricing.pro}</td>
-              <td class="features-cell">${service.features.slice(0, 2).join(', ')}</td>
-              <td><button onclick="window.open('${service.subscribeUrl}', '_blank')" class="mini-subscribe-btn">구독</button></td>
-            </tr>
-          `).join('')}
+    <div class="pricing-comparison-wrapper">
+      <!-- 카테고리 선택 탭 -->
+      <div class="category-tabs">
+        ${aiCategories.map((category, index) => `
+          <button class="category-tab ${index === 0 ? 'active' : ''}" data-category="${category.id}">
+            ${category.name}
+          </button>
+        `).join('')}
+      </div>
+      
+      <!-- AI 선택 그리드 -->
+      <div class="ai-selection-grid">
+        ${aiCategories.map((category, index) => `
+          <div class="category-services ${index === 0 ? 'active' : ''}" data-category="${category.id}">
+            ${category.services.map(service => `
+              <div class="ai-select-card" data-service-id="${service.id}">
+                <div class="ai-select-header">
+                  <img src="${service.image}" alt="${service.name}" class="ai-select-image" />
+                  <div class="ai-select-info">
+                    <h4>${service.name}</h4>
+                    <div class="ai-rating">⭐ ${service.rating}</div>
+                  </div>
+                  <div class="ai-select-checkbox">
+                    <input type="checkbox" id="select-${service.id}" class="ai-checkbox" />
+                    <label for="select-${service.id}" class="checkbox-label"></label>
+                  </div>
+                </div>
+                <div class="ai-select-details">
+                  <div class="ai-pricing">
+                    <div class="price-free">무료: ${service.pricing.free}</div>
+                    <div class="price-pro">프리미엄: ${service.pricing.pro}</div>
+                  </div>
+                  <div class="ai-features">
+                    ${service.features.slice(0, 2).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+      
+      <!-- 비교 결과 영역 -->
+      <div class="comparison-results" id="comparison-results" style="display: none;">
+        <h3>선택한 AI 서비스 비교</h3>
+        <div class="comparison-content" id="comparison-content"></div>
+      </div>
+    </div>
+  `;
+  
+  // 카테고리 탭 이벤트 리스너 추가
+  setupCategoryTabs();
+  // AI 선택 체크박스 이벤트 리스너 추가
+  setupAICheckboxes();
+}
         </tbody>
       </table>
     </div>
-  `;
+  // 카테고리 탭 이벤트 리스너 추가
+  setupCategoryTabs();
+  // AI 선택 체크박스 이벤트 리스너 추가
+  setupAICheckboxes();
 }
 
-// 3. AI 서비스 선택/비선택 토글
-function toggleServiceSelection(service, button) {
-  const index = selectedServices.findIndex(s => s.id === service.id);
+// 카테고리 탭 설정
+function setupCategoryTabs() {
+  const tabs = document.querySelectorAll('.category-tab');
+  const categories = document.querySelectorAll('.category-services');
   
-  if (index > -1) {
-    // 선택 해제
-    selectedServices.splice(index, 1);
-    button.style.background = 'var(--surface)';
-    button.style.color = 'var(--text)';
-  } else {
-    // 선택 추가 (최대 2개)
-    if (selectedServices.length >= 2) {
-      selectedServices.shift(); // 첫 번째 항목 제거
-      // 다른 버튼들의 상태 업데이트
-      document.querySelectorAll('.compare-btn').forEach(btn => {
-        if (btn.dataset.serviceId === selectedServices[0].id) {
-          btn.style.background = 'var(--primary-strong)';
-          btn.style.color = 'white';
-        } else {
-          btn.style.background = 'var(--surface)';
-          btn.style.color = 'var(--text)';
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // 모든 탭에서 active 클래스 제거
+      tabs.forEach(t => t.classList.remove('active'));
+      // 모든 카테고리에서 active 클래스 제거
+      categories.forEach(c => c.classList.remove('active'));
+      
+      // 클릭한 탭에 active 클래스 추가
+      tab.classList.add('active');
+      // 해당 카테고리에 active 클래스 추가
+      const categoryId = tab.dataset.category;
+      document.querySelector(`.category-services[data-category="${categoryId}"]`).classList.add('active');
+    });
+  });
+}
+
+// AI 체크박스 설정
+function setupAICheckboxes() {
+  const checkboxes = document.querySelectorAll('.ai-checkbox');
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const serviceId = parseInt(e.target.id.replace('select-', ''));
+      const service = findServiceById(serviceId);
+      
+      if (e.target.checked) {
+        if (selectedServices.length >= 2) {
+          // 이미 2개 선택되어 있으면 첫 번째 선택 해제
+          const firstService = selectedServices.shift();
+          document.getElementById(`select-${firstService.id}`).checked = false;
         }
-      });
-    }
-    selectedServices.push(service);
-    button.style.background = 'var(--primary-strong)';
-    button.style.color = 'white';
-  }
-  
-  // 두 개 선택되면 비교 모달 표시
-  if (selectedServices.length === 2) {
-    showComparisonModal(selectedServices[0], selectedServices[1]);
-  }
+        selectedServices.push(service);
+      } else {
+        // 선택 해제
+        const index = selectedServices.findIndex(s => s.id === serviceId);
+        if (index > -1) {
+          selectedServices.splice(index, 1);
+        }
+      }
+      
+      // 비교 결과 업데이트
+      updateComparisonResults();
+    });
+  });
 }
 
-// 4. 비교 모달 표시
-function showComparisonModal(service1, service2) {
-  const priceParse = (price) => {
-    if (price.includes('$')) {
-      return parseFloat(price.match(/\d+/)[0]);
-    }
-    return 0;
-  };
+// 서비스 ID로 서비스 찾기
+function findServiceById(id) {
+  for (const category of aiCategories) {
+    const service = category.services.find(s => s.id === id);
+    if (service) return service;
+  }
+  return null;
+}
+
+// 비교 결과 업데이트
+function updateComparisonResults() {
+  const resultsContainer = document.getElementById('comparison-results');
+  const contentContainer = document.getElementById('comparison-content');
   
-  const price1 = priceParse(service1.pricing.pro);
-  const price2 = priceParse(service2.pricing.pro);
-  const priceDiff = Math.abs(price1 - price2);
-  const cheaper = price1 < price2 ? service1.name : service2.name;
-  
-  comparisonContent.innerHTML = `
-    <div style="padding: 1rem 0;">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+  if (selectedServices.length === 2) {
+    const service1 = selectedServices[0];
+    const service2 = selectedServices[1];
+    
+    const priceParse = (price) => {
+      if (price.includes('$')) {
+        return parseFloat(price.match(/\d+/)[0]);
+      }
+      return 0;
+    };
+    
+    const price1 = priceParse(service1.pricing.pro);
+    const price2 = priceParse(service2.pricing.pro);
+    const priceDiff = Math.abs(price1 - price2);
+    const cheaper = price1 < price2 ? service1.name : service2.name;
+    
+    contentContainer.innerHTML = `
+      <div class="comparison-grid">
         <!-- 서비스 1 -->
-        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border);">
-          <img src="${service1.image}" alt="${service1.name}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 0.5rem;" />
-          <h4 style="margin: 0.5rem 0 0.25rem 0; color: var(--text);">${service1.name}</h4>
-          <div style="display: flex; justify-content: center; gap: 0.5rem; margin: 0.5rem 0;">
-            <span style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">⭐ ${service1.rating}</span>
+        <div class="comparison-service">
+          <div class="service-header">
+            <img src="${service1.image}" alt="${service1.name}" class="service-compare-image" />
+            <div>
+              <h4>${service1.name}</h4>
+              <div class="rating">⭐ ${service1.rating}</div>
+            </div>
           </div>
-          <p style="color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0; line-height: 1.4;">${service1.description}</p>
+          <div class="service-pricing">
+            <div class="price-item">
+              <span class="price-label">무료 플랜:</span>
+              <span class="price-value">${service1.pricing.free}</span>
+            </div>
+            <div class="price-item">
+              <span class="price-label">프리미엄:</span>
+              <span class="price-value price-pro">${service1.pricing.pro}</span>
+            </div>
+          </div>
+          <div class="service-strengths">
+            <h5>✅ 핵심 강점</h5>
+            <p>${service1.strengths}</p>
+          </div>
+          <div class="service-features">
+            <h5>🎯 주요 기능</h5>
+            <div class="features-list">
+              ${service1.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+            </div>
+          </div>
+          <a href="${service1.subscribeUrl}" target="_blank" class="primary-btn">구독하기</a>
         </div>
         
         <!-- 서비스 2 -->
-        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border);">
-          <img src="${service2.image}" alt="${service2.name}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 0.5rem;" />
-          <h4 style="margin: 0.5rem 0 0.25rem 0; color: var(--text);">${service2.name}</h4>
-          <div style="display: flex; justify-content: center; gap: 0.5rem; margin: 0.5rem 0;">
-            <span style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">⭐ ${service2.rating}</span>
-          </div>
-          <p style="color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0; line-height: 1.4;">${service2.description}</p>
-        </div>
-      </div>
-      
-      <!-- 가격 비교 -->
-      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border);">
-        <h5 style="color: var(--text); margin: 0 0 1rem 0; font-size: 1.1rem;">💰 가격 비교</h5>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-          <div>
-            <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 0.5rem 0;">무료 플랜</p>
-            <p style="color: var(--text); margin: 0; font-weight: 600;">${service1.pricing.free}</p>
-          </div>
-          <div>
-            <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 0.5rem 0;">무료 플랜</p>
-            <p style="color: var(--text); margin: 0; font-weight: 600;">${service2.pricing.free}</p>
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div style="background: rgba(75, 108, 247, 0.1); padding: 0.75rem; border-radius: 8px;">
-            <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 0.5rem 0;">프리미엄</p>
-            <p style="color: #4b6cf7; margin: 0; font-weight: 700; font-size: 1.1rem;">${service1.pricing.pro}</p>
-          </div>
-          <div style="background: rgba(75, 108, 247, 0.1); padding: 0.75rem; border-radius: 8px;">
-            <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 0.5rem 0;">프리미엄</p>
-            <p style="color: #4b6cf7; margin: 0; font-weight: 700; font-size: 1.1rem;">${service2.pricing.pro}</p>
-          </div>
-        </div>
-        ${price1 !== price2 ? `<p style="color: #10b981; margin: 1rem 0 0 0; font-size: 0.9rem; text-align: center;">💡 <strong>${cheaper}</strong>이(가) ${priceDiff}달러 더 저렴합니다.</p>` : ''}
-      </div>
-      
-      <!-- 장단점 비교 -->
-      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border);">
-        <h5 style="color: var(--text); margin: 0 0 1rem 0; font-size: 1.1rem;">✅ 핵심 강점</h5>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div>
-            <p style="color: #10b981; margin: 0 0 0.5rem 0; font-weight: 600;">${service1.name}</p>
-            <p style="color: var(--muted); font-size: 0.9rem; margin: 0; line-height: 1.4;">${service1.strengths}</p>
-          </div>
-          <div>
-            <p style="color: #10b981; margin: 0 0 0.5rem 0; font-weight: 600;">${service2.name}</p>
-            <p style="color: var(--muted); font-size: 0.9rem; margin: 0; line-height: 1.4;">${service2.strengths}</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 기능 비교 -->
-      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
-        <h5 style="color: var(--text); margin: 0 0 1rem 0; font-size: 1.1rem;">🎯 주요 기능</h5>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div>
-            <p style="color: var(--text); margin: 0 0 0.5rem 0; font-weight: 600; font-size: 0.95rem;">${service1.name}</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-              ${service1.features.map(f => `<span style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.8rem;">${f}</span>`).join('')}
+        <div class="comparison-service">
+          <div class="service-header">
+            <img src="${service2.image}" alt="${service2.name}" class="service-compare-image" />
+            <div>
+              <h4>${service2.name}</h4>
+              <div class="rating">⭐ ${service2.rating}</div>
             </div>
           </div>
-          <div>
-            <p style="color: var(--text); margin: 0 0 0.5rem 0; font-weight: 600; font-size: 0.95rem;">${service2.name}</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-              ${service2.features.map(f => `<span style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.8rem;">${f}</span>`).join('')}
+          <div class="service-pricing">
+            <div class="price-item">
+              <span class="price-label">무료 플랜:</span>
+              <span class="price-value">${service2.pricing.free}</span>
+            </div>
+            <div class="price-item">
+              <span class="price-label">프리미엄:</span>
+              <span class="price-value price-pro">${service2.pricing.pro}</span>
             </div>
           </div>
+          <div class="service-strengths">
+            <h5>✅ 핵심 강점</h5>
+            <p>${service2.strengths}</p>
+          </div>
+          <div class="service-features">
+            <h5>🎯 주요 기능</h5>
+            <div class="features-list">
+              ${service2.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+            </div>
+          </div>
+          <a href="${service2.subscribeUrl}" target="_blank" class="primary-btn">구독하기</a>
         </div>
       </div>
-    </div>
-  `;
-  compareOverlay.classList.add('open');
+      
+      <!-- 가격 비교 요약 -->
+      ${price1 !== price2 ? `
+        <div class="price-comparison-summary">
+          <h4>💰 가격 비교</h4>
+          <p class="price-difference">
+            <strong>${cheaper}</strong>이(가) ${priceDiff}달러 더 저렴합니다
+          </p>
+        </div>
+      ` : ''}
+    `;
+    
+    resultsContainer.style.display = 'block';
+  } else {
+    resultsContainer.style.display = 'none';
+  }
 }
 
 // 5. 모달(팝업) 띄우기 함수
+function showModal(service) {
 function showModal(service) {
   subscriptionContent.innerHTML = `
     <div style="padding: 1rem 0;">
@@ -372,34 +417,8 @@ if (modalOverlay) {
   });
 }
 
-// 7. 비교 모달 닫기 이벤트
-if (closeCompareBtn) {
-  closeCompareBtn.addEventListener('click', () => {
-    compareOverlay.classList.remove('open');
-    selectedServices = [];
-    // 비교 버튼들의 상태 초기화
-    document.querySelectorAll('.compare-btn').forEach(btn => {
-      btn.style.background = 'var(--surface)';
-      btn.style.color = 'var(--text)';
-    });
-  });
-}
-
-if (compareOverlay) {
-  compareOverlay.addEventListener('click', (e) => {
-    if (e.target === compareOverlay) {
-      compareOverlay.classList.remove('open');
-      selectedServices = [];
-      // 비교 버튼들의 상태 초기화
-      document.querySelectorAll('.compare-btn').forEach(btn => {
-        btn.style.background = 'var(--surface)';
-        btn.style.color = 'var(--text)';
-      });
-    }
-  });
-}
-
-// 8. 헤더 메뉴 토글 (모바일용)
+// 6. 헤더 메뉴 토글 (모바일용)
+if (menuToggle && mainNav) {
 if (menuToggle && mainNav) {
   menuToggle.addEventListener('click', () => {
     mainNav.classList.toggle('open');
