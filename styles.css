@@ -1,12 +1,11 @@
 :root {
-  --bg: #000000;          /* 완전한 검은색 배경 */
-  --surface: #111111;     /* 카드/모달 배경 (어두운 회색) */
+  --bg: #050505;          /* 더 깊고 고급스러운 리얼 블랙 */
+  --surface: #121214;     /* 카드 배경용 다크 그레이 */
   --primary: #6366f1;
   --primary-strong: #4f46e5;
-  --text: #ffffff;        /* 글자는 흰색 */
-  --muted: #9ca3af;       /* 보조 글자색 */
-  --border: #222222;      /* 테두리 선 */
-  --accent: #f59e0b;
+  --text: #f8fafc;        /* 완전 흰색보다 눈이 편한 오프화이트 */
+  --muted: #94a3b8;       /* 부드러운 회색 텍스트 */
+  --border: #27272a;      /* 은은한 테두리 */
 }
 
 * {
@@ -15,10 +14,11 @@
 
 body {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
+  line-height: 1.6;
 }
 
 img {
@@ -31,23 +31,15 @@ img {
   margin: 0 auto;
 }
 
-/* 각 섹션을 1페이지 씩 분할 */
-main > section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 0;
-  border-bottom: 1px solid var(--border);
-}
-
+/* 헤더 - 블러(유리) 효과 추가 */
 .site-header {
-  background: rgba(0, 0, 0, 0.95); /* 다크 모드 헤더 */
-  border-bottom: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
-  z-index: 10;
-  backdrop-filter: blur(5px);
+  z-index: 50;
+  backdrop-filter: blur(12px); /* 고급스러운 반투명 효과 */
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .header-inner {
@@ -59,21 +51,24 @@ main > section {
 }
 
 .brand {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-  color: var(--primary-strong);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(to right, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .main-nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .main-nav a {
   color: var(--muted);
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
@@ -81,219 +76,171 @@ main > section {
   color: var(--text);
 }
 
+/* 프리미엄 버튼 디자인 */
 .cart-button,
 .primary-btn {
   border: none;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
   color: white;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.8rem;
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(75, 108, 247, 0.3);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   text-decoration: none;
   display: inline-block;
-}
-
-.cart-button::before,
-.primary-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.cart-button:hover::before,
-.primary-btn:hover::before {
-  left: 100%;
 }
 
 .cart-button:hover,
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(75, 108, 247, 0.4);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
 }
 
-.cart-button:active,
-.primary-btn:active {
-  transform: translateY(0);
-}
-
-/* 홈 섹션: 가운데 정렬 및 글자-그림 사이 간격 축소 */
+/* 홈 섹션 설정 */
 .hero {
-  display: flex !important;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  gap: 1.5rem; 
-}
-
-.hero-image {
-  order: -1; /* 이미지를 위로 배치 */
+  min-height: 90vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 4rem 0;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 320px; /* 이미지 크기 축소 */
+  max-width: 320px;
   height: auto;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
 }
 
-.hero-copy .eyebrow {
-  margin: 0 0 1rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--primary);
-}
-
 .hero-copy h1 {
-  font-size: 3.2rem;
+  font-size: 3.5rem;
   font-weight: 800;
-  margin: 0 0 1rem 0;
+  margin: 1rem 0;
   background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
   line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 
 .hero-copy p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0 auto 2rem auto;
+  font-size: 1.15rem;
   color: var(--muted);
   max-width: 600px;
+  margin: 0 auto 2rem auto;
 }
 
-/* 이 부분을 찾아서 아래 내용으로 덮어쓰세요 */
+/* 본문 섹션 간격 */
+main > section:not(.hero) {
+  padding: 6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 3단 특징 섹션 */
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  align-items: start; /* 핵심! 카드가 위쪽으로 착 붙어서 길어지지 않음 */
-  min-height: auto !important; /* 100vh 강제 적용 해제 */
-  padding: 4rem 0 !important;
 }
 
 .features article {
-  background: var(--surface);
-  padding: 1.5rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
+  transition: transform 0.3s;
 }
 
-.features h3 {
-  margin: 0 0 0.75rem;
+.features article:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.product-list .section-header,
-.pricing-table .section-header,
-.info-block .section-header {
+.section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+}
+
+.category-section {
+  grid-column: 1 / -1;
+  padding: 2rem 0 1rem;
+}
+
+.category-section h2 {
+  font-size: 1.5rem;
+  color: #fff;
   margin: 0 0 0.5rem 0;
-  font-size: 2.2rem;
-}
-
-.section-header p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
 }
 
 #ai-services-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-}
-
-.category-section {
-  grid-column: 1 / -1;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.category-section h2 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.6rem;
-  color: var(--text);
-}
-
-.category-section p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
+  gap: 2rem;
 }
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.2rem;
-  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
-/* AI 서비스 카드: 길이 및 여백 축소 */
+/* ★★★ 문제의 AI 카드 디자인 (세련되게 & 간격 완벽 해결) ★★★ */
 .product-card {
-  background: var(--surface);
-  border-radius: 1.2rem;
-  overflow: hidden;
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-  border-color: var(--primary);
+  transform: translateY(-8px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
 }
 
 .image-container {
-  width: 100%;
-  aspect-ratio: 16 / 9; /* 이미지 높이 줄임 */
-  background: linear-gradient(135deg, #1f1f2e 0%, #2a2a35 100%);
+  height: 140px; /* 고정 높이로 통일 */
+  background: radial-gradient(circle at top, #1f1f2e 0%, #0a0a0f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .service-image {
-  width: 100%;
-  height: 100%;
+  max-height: 100%;
+  max-width: 65%;
   object-fit: contain;
-  padding: 1rem;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); /* 로고 입체감 */
 }
 
+/* 카드 내부: Flexbox로 위에서부터 차곡차곡 쌓이게 강제 설정 */
 .product-card.ai-service-card .card-content {
-  padding: 1.2rem;
-  display: flex;           /* grid에서 flex로 변경하여 위에서부터 차곡차곡 쌓이게 함 */
+  padding: 1.5rem;
+  display: flex;
   flex-direction: column;
-  gap: 0.8rem;             /* 텍스트 사이 간격 적당히 조절 */
-  flex: 1;
+  gap: 1rem; /* 텍스트와 태그 사이의 고정된 간격 */
+  flex-grow: 1; /* 카드 높이가 길어져도 이 부분이 공간을 차지함 */
 }
 
 .ai-service-card .service-header {
@@ -304,186 +251,182 @@ main > section {
 
 .ai-service-card h3 {
   margin: 0;
-  font-size: 1.1rem;
-}
-
-/* 다크모드 대응 평점 색상 */
-.ai-service-card .rating {
-  background: #f0f9ff;
-  color: #000000;          /* 하얀 배경엔 검은 글씨 */
-  padding: 0.25rem 0.6rem;
-  border-radius: 0.5rem;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
+
+/* 별점: 촌스러운 흰색 대신 골드빛 투명 박스 */
+.ai-service-card .rating {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fbbf24;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
 .product-card p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
-  line-height: 1.4;
-  /* 설명이 너무 길면 자르기 */
+  font-size: 0.9rem;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* 태그: 흰색 배경+검은 글씨 대신 고급스러운 반투명 알약(Pill) 스타일 */
 .ai-service-card .features {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .feature-tag {
-  background: #f3f4f6;
-  color: #000000;          /* 하얀 배경엔 검은 글씨 */
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 50px;
   font-size: 0.75rem;
-  font-weight: 600;        /* 글씨가 잘 보이게 약간 굵게 */
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* 하단 정보(장점/가격): 마진 auto로 무조건 맨 바닥으로 밀어버림 */
 .ai-service-card .service-info {
-  display: grid;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  margin-top: auto;        /* 핵심! 빈 공간을 위로 밀어내고 얘네는 바닥에 착 붙임 */
+  margin-top: auto; 
   padding-top: 1rem;       
-  border-top: 1px solid var(--border); /* 구분선을 넣어서 더 깔끔하게 */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .ai-service-card .strengths {
-  color: #10b981; /* 다크모드에 맞는 초록색 */
+  color: #34d399; /* 세련된 네온 민트 */
   font-weight: 500;
+  font-size: 0.85rem;
 }
 
 .ai-service-card .pricing {
-  color: #ef4444; /* 다크모드에 맞는 빨간색 */
-  font-weight: 600;
+  color: #f87171; /* 네온 레드 */
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
+/* 카드 안의 구독 버튼 (Outline 스타일) */
 .subscribe-btn {
-  background: linear-gradient(135deg, var(--primary) 0%, #5a67d8 100%);
-  color: white;
-  border: none;
-  padding: 0.75rem 1rem;
-  border-radius: 50px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 0.8rem;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   width: 100%;
-  margin-top: 0.5rem;      /* 버튼 위 불필요한 공백 제거 */
-  transition: transform 0.2s;
+  margin-top: 0.5rem;
+  transition: all 0.2s ease;
 }
+
 .subscribe-btn:hover {
-  transform: translateY(-2px);
+  background: var(--primary-strong);
+  color: white;
+  border-color: var(--primary-strong);
 }
 
-.info-block {
-  text-align: center;
-}
-
+/* 추천 섹션 */
 .recommendation-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
 }
 
 .rec-card {
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.02);
   padding: 2rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
+  text-align: left;
 }
 
 .rec-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .rec-card h4 {
+  font-size: 1.2rem;
   margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
 }
 
 .rec-card p {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin: 0 0 1rem 0;
 }
 
-.rec-card small {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-/* -------------------------------------
-   가격 비교 테이블 (다크모드 수정)
--------------------------------------- */
+/* 가격 비교 테이블 */
 .pricing-table-container {
   overflow-x: auto;
-  background: var(--surface);
-  border-radius: 1rem;
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .pricing-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .pricing-table th {
-  background: #18181b; /* 어두운 배경 */
-  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.2rem;
   text-align: left;
   font-weight: 600;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text);
 }
 
 .pricing-table td {
-  padding: 1rem;
-  border-bottom: 1px solid var(--border);
+  padding: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .pricing-table tr:hover {
-  background: #222222;
-}
-
-.features-cell {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.rating-cell {
-  text-align: center;
-  font-weight: 600;
-  color: #ef4444;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .mini-subscribe-btn {
   background: var(--primary);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
   font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s;
+}
+.mini-subscribe-btn:hover {
+  background: var(--primary-strong);
 }
 
 /* -------------------------------------
-   팝업(모달) 스타일 (모서리 둥글게)
+   팝업(모달) - 세련된 다크 글래스모피즘
 -------------------------------------- */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* 배경 클릭 가능하게 어둡게 */
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -499,20 +442,20 @@ main > section {
 }
 
 .modal-window {
-  background: linear-gradient(135deg, var(--surface) 0%, #1a1a1a 100%);
+  background: #121214; /* 깔끔한 다크 배경 */
   width: 90%;
   max-width: 420px;
-  border-radius: 24px; /* 모서리 둥글게 처리 */
-  border: 1px solid var(--border);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
 }
 
 .modal-overlay.open .modal-window {
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .subscription-header {
@@ -520,12 +463,13 @@ main > section {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .panel-title h3 {
   margin: 0 0 0.3rem 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 .panel-title p {
   margin: 0;
@@ -534,7 +478,7 @@ main > section {
 }
 
 .close-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   border: none;
   width: 36px;
   height: 36px;
@@ -547,29 +491,19 @@ main > section {
   transition: background 0.2s;
 }
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .subscription-content {
   padding: 1.5rem;
 }
 
-.empty-state {
-  text-align: center;
+/* 푸터 */
+.site-footer {
+  background: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 2rem 0;
   color: var(--muted);
-}
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.site-footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 1.5rem 0;
-  color: var(--muted);
-  text-align: center;
 }
 
 .footer-inner {
@@ -581,36 +515,36 @@ main > section {
 }
 
 .footer-links a {
-  color: var(--primary);
+  color: var(--muted);
   text-decoration: none;
-  font-weight: 500;
-  margin-left: 1rem;
+  font-size: 0.9rem;
+  margin-left: 1.5rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: var(--text);
 }
 
 /* 모바일 메뉴버튼 */
 .menu-toggle {
   display: none;
   border: none;
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text);
-  font-size: 1.3rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  font-size: 1.2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
 /* 반응형 */
 @media (max-width: 860px) {
-  .features {
-    grid-template-columns: 1fr;
-  }
+  .hero-copy h1 { font-size: 2.8rem; }
 }
 
 @media (max-width: 720px) {
-  .header-inner {
-    flex-wrap: wrap;
-  }
+  .header-inner { flex-wrap: wrap; }
   .menu-toggle {
     display: flex;
     justify-content: center;
@@ -621,24 +555,20 @@ main > section {
     top: 100%;
     left: 0;
     width: 100%;
-    background: rgba(17, 17, 17, 0.98);
+    background: rgba(10, 10, 12, 0.98);
+    backdrop-filter: blur(10px);
     flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
-    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transform: translateY(-150%);
     transition: transform 0.3s ease;
     z-index: 5;
   }
-  .main-nav.open {
-    transform: translateY(0);
-  }
+  .main-nav.open { transform: translateY(0); }
   .main-nav a {
     width: 100%;
     text-align: center;
-    padding: 0.5rem 0;
-  }
-  .hero-copy h1 {
-    font-size: 2.5rem;
+    font-size: 1.1rem;
   }
 }
