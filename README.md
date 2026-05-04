@@ -21,9 +21,9 @@ git push -u origin main
 5. `Branch`를 `main`, `Folder`를 `/ (root)`로 선택하고 저장합니다.
 6. 잠시 기다리면 페이지가 활성화됩니다.
 
-## 사이트 주소 예시
+## 사이트 주소
 
-- `https://your-username.github.io/your-repo/`
+(https://your-username.github.io/your-repo/`](https://ai-coding-tau.vercel.app/#home)
 
 ## 파일 설명
 
