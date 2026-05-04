@@ -1,449 +1,206 @@
+// 1. 확장된 AI 카테고리 데이터
 const aiCategories = [
   {
-    id: 'text-code',
-    name: '📝 텍스트/코드 생성',
-    description: 'AI를 이용한 텍스트 작성, 분석, 코드 생성',
+    id: 'text', name: '📝 텍스트 / 기획 / 코드', description: '아이디어 기획, 번역, 코딩 등을 도와주는 AI',
     services: [
-      {
-        id: 1, name: 'ChatGPT', description: 'OpenAI의 대표 AI. 텍스트 생성, 코드 작성, 분석 등 다양한 분야에서 뛰어난 성능.',
-        features: ['텍스트 생성', '코드 작성', '분석/요약', '다국어 지원'], strengths: '가장 대중적이고 안정적인 성능',
-        pricing: { free: '제한적', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png',
-        subscribeUrl: 'https://chat.openai.com/', rating: 4.8
-      },
-      {
-        id: 2, name: 'Claude', description: 'Anthropic의 안전한 AI. 긴 텍스트 처리와 분석에 강점.',
-        features: ['긴 텍스트 처리', '안전한 응답', '분석 전문성', '연구용 최적화'], strengths: '안전성과 정확성',
-        pricing: { free: '제한적', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Claude_%28software%29_logo.svg/200px-Claude_%28software%29_logo.svg.png',
-        subscribeUrl: 'https://claude.ai/', rating: 4.7
-      },
-      {
-        id: 3, name: 'Gemini', description: 'Google의 멀티모달 AI. 텍스트, 이미지, 동영상 모두 처리.',
-        features: ['멀티모달', '실시간 검색', 'Google 통합', '무료 많음'], strengths: '무료 플랜이 풍부하고 통합성 좋음',
-        pricing: { free: '광범위', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Google_Gemini_logo.svg/200px-Google_Gemini_logo.svg.png',
-        subscribeUrl: 'https://gemini.google.com/', rating: 4.5
-      },
-      {
-        id: 4, name: 'GitHub Copilot', description: '코딩 전문 AI. 실시간 코드 제안과 자동 완성.',
-        features: ['코드 자동완성', '다언어 지원', '실시간 제안', 'IDE 통합'], strengths: '개발 생산성 대폭 향상',
-        pricing: { free: '학생용', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/200px-Visual_Studio_Code_1.35_icon.svg.png',
-        subscribeUrl: 'https://github.com/features/copilot', rating: 4.6
-      },
-      {
-        id: 5, name: 'Notion AI', description: '노트 작성과 문서 자동 생성, 회의 요약에 특화된 생산성 AI.',
-        features: ['문서 작성', '요약', '아이디어 정리', '템플릿 지원'], strengths: '업무 흐름에 자연스럽게 녹아드는 통합성',
-        pricing: { free: '제한적', pro: '$8/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Notion-logo.svg/200px-Notion-logo.svg.png',
-        subscribeUrl: 'https://www.notion.so/product/ai', rating: 4.4
-      },
-      {
-        id: 6, name: 'Jasper', description: '마케팅 콘텐츠와 광고 문구 생성에 강력한 텍스트 AI.',
-        features: ['광고 문구', '블로그 글', 'SEO 콘텐츠', '브랜드 음성 유지'], strengths: '신속한 캠페인 콘텐츠 제작',
-        pricing: { free: '체험', pro: '$29/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Jasper_logo.svg/200px-Jasper_logo.svg.png',
-        subscribeUrl: 'https://www.jasper.ai/', rating: 4.3
-      },
-      {
-        id: 9, name: 'Grammarly', description: '문법 검사와 스타일 개선을 자동으로 도와주는 AI 라이팅 도우미.',
-        features: ['문법 교정', '스타일 가이드', '플러그인 통합', '단어 선택 개선'], strengths: '정확하고 자연스러운 문서 품질 향상',
-        pricing: { free: '기본', pro: '$12/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Grammarly_Logo.svg/200px-Grammarly_Logo.svg.png',
-        subscribeUrl: 'https://www.grammarly.com/', rating: 4.5
-      }
+      { id: 'gpt', name: 'ChatGPT', description: '가장 대중적이고 똑똑한 다목적 AI', strengths: '안정적인 성능, 방대한 지식, 우수한 한글 처리', weaknesses: '실시간 검색 기능이 가끔 불안정함', pricing: { free: 'GPT-3.5 무료', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png', features: ['텍스트', '코드', '데이터분석'], subscribeUrl: 'https://chat.openai.com/' },
+      { id: 'claude', name: 'Claude 3', description: '자연스럽고 긴 글 작성에 특화된 AI', strengths: '인간처럼 자연스러운 문장력, 긴 문서 요약 탁월', weaknesses: '인터넷 검색 기능 부재', pricing: { free: '제한적 무료', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Claude_%28software%29_logo.svg/200px-Claude_%28software%29_logo.svg.png', features: ['문서작성', '코드분석', '안전성'], subscribeUrl: 'https://claude.ai/' },
+      { id: 'gemini', name: 'Gemini', description: '구글 생태계와 연동되는 빠른 AI', strengths: '구글 독스/드라이브 연동, 매우 빠른 응답 속도', weaknesses: '한국어 문장력이 타 서비스 대비 약간 아쉬움', pricing: { free: '광범위', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Google_Gemini_logo.svg/200px-Google_Gemini_logo.svg.png', features: ['구글연동', '멀티모달', '검색'], subscribeUrl: 'https://gemini.google.com/' },
+      { id: 'copilot', name: 'GitHub Copilot', description: '개발자를 위한 최강의 코딩 도우미', strengths: '에디터 내장, 압도적인 코드 자동완성 속도', weaknesses: '코딩 외의 일반적인 대화에는 부적합', pricing: { free: '학생 무료', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/200px-Visual_Studio_Code_1.35_icon.svg.png', features: ['코드완성', 'IDE통합', '버그수정'], subscribeUrl: 'https://github.com/features/copilot' }
     ]
   },
   {
-    id: 'image',
-    name: '🎨 이미지 생성',
-    description: '텍스트 설명으로 이미지를 자동 생성',
+    id: 'presentation', name: '📊 PPT / 프레젠테이션', description: '주제만 입력하면 알아서 슬라이드를 만들어주는 AI',
     services: [
-      {
-        id: 7, name: 'Midjourney', description: '고품질 이미지 생성 AI. 예술적이고 창의적인 이미지 생성에 특화.',
-        features: ['고품질 이미지', '예술적 스타일', 'Discord 통합'], strengths: '최고 수준의 이미지 품질',
-        pricing: { free: '제한적', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.svg/200px-Midjourney_Emblem.svg.png',
-        subscribeUrl: 'https://www.midjourney.com/', rating: 4.9
-      },
-      {
-        id: 8, name: 'DALL-E 3', description: 'OpenAI의 이미지 생성 AI. 텍스트로부터 정확한 이미지 생성.',
-        features: ['정확한 이미지 생성', '편집 기능', 'API 지원'], strengths: '텍스트-이미지 변환 정확도 높음',
-        pricing: { free: '크레딧', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png',
-        subscribeUrl: 'https://openai.com/dall-e-3/', rating: 4.6
-      },
-      {
-        id: 10, name: 'Stable Diffusion', description: '오픈소스 이미지 생성 모델. 커스터마이징과 로컬 실행 지원.',
-        features: ['오픈소스', '로컬 실행', '모델 커스터마이즈', '빠른 생성'], strengths: '자유도가 높고 가격 부담이 적음',
-        pricing: { free: '오픈소스', pro: '맞춤형 요금' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Stable_Diffusion_logo.svg/200px-Stable_Diffusion_logo.svg.png',
-        subscribeUrl: 'https://stability.ai/', rating: 4.2
-      },
-      {
-        id: 11, name: 'Runway', description: '비디오와 이미지 생성에 최적화된 크리에이티브 AI 플랫폼.',
-        features: ['비디오 편집', '모션 그래픽', '이미지 생성', '브랜딩 템플릿'], strengths: '영상 제작 워크플로우에 바로 적용 가능',
-        pricing: { free: '제한적', pro: '$12/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Runway_%28software%29_logo.svg/200px-Runway_%28software%29_logo.svg.png',
-        subscribeUrl: 'https://runwayml.com/', rating: 4.4
-      }
+      { id: 'gamma', name: 'Gamma', description: '웹 기반의 초고속 문서/PPT 생성 AI', strengths: '텍스트만 치면 1분만에 완성, 세련된 웹 UI', weaknesses: '세밀한 디자인(위치 조정 등) 수정이 까다로움', pricing: { free: '가입시 크레딧', pro: '$20/월' }, image: 'https://www.gamma.app/favicon.ico', features: ['PPT생성', '웹공유', '디자인'], subscribeUrl: 'https://gamma.app/' },
+      { id: 'beautiful', name: 'Beautiful.ai', description: '디자인 감각이 없어도 예쁘게 만들어주는 PPT AI', strengths: '자동 레이아웃 정렬로 무조건 예쁘게 나옴', weaknesses: '무료 플랜이 거의 없고, 한글 폰트 지원이 아쉬움', pricing: { free: '없음', pro: '$12/월' }, image: 'https://beautiful.ai/favicon.ico', features: ['자동레이아웃', '차트생성', '템플릿'], subscribeUrl: 'https://www.beautiful.ai/' }
+    ]
+  },
+  {
+    id: 'image', name: '🎨 이미지 / 영상 생성', description: '그림을 그려주거나 영상을 만들어주는 AI',
+    services: [
+      { id: 'midjourney', name: 'Midjourney', description: '압도적인 퀄리티의 그림 생성 AI', strengths: '실사, 예술작품 등 현존 최고의 이미지 퀄리티', weaknesses: '디스코드(Discord)를 통해서만 사용해야 해서 불편함', pricing: { free: '없음', pro: '$10/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.svg/200px-Midjourney_Emblem.svg.png', features: ['고퀄리티', '예술성', '다양한화풍'], subscribeUrl: 'https://www.midjourney.com/' },
+      { id: 'dalle', name: 'DALL-E 3', description: '챗GPT 안에서 쉽게 그리는 AI', strengths: '대화하듯 쉽게 수정 가능, 명령어를 정확히 이해함', weaknesses: '미드저니에 비해 디테일이나 실사 느낌이 떨어짐', pricing: { free: '제한적', pro: '$20/월 (GPT Plus)' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png', features: ['쉬운사용', '정확도', '대화형'], subscribeUrl: 'https://openai.com/dall-e-3/' },
+      { id: 'runway', name: 'Runway', description: '사진을 움직이게 만드는 비디오 AI', strengths: '텍스트나 이미지만으로 퀄리티 높은 짧은 영상 제작', weaknesses: '비용이 비싸고 긴 영상 제작은 한계가 있음', pricing: { free: '무료 크레딧', pro: '$15/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Runway_%28software%29_logo.svg/200px-Runway_%28software%29_logo.svg.png', features: ['영상생성', '모션브러시', '특수효과'], subscribeUrl: 'https://runwayml.com/' }
     ]
   }
 ];
 
-// HTML 요소 가져오기
+// DOM 요소
 const aiServicesGrid = document.getElementById('ai-services-grid');
-const pricingComparison = document.getElementById('pricing-comparison');
-const menuToggle = document.getElementById('menu-toggle');
-const mainNav = document.getElementById('main-nav');
-const topSubBtn = document.getElementById('subscription-btn'); // 상단 헤더 버튼
+const catSelect = document.getElementById('compare-category');
+const slot1 = document.getElementById('compare-slot-1');
+const slot2 = document.getElementById('compare-slot-2');
+const resultContainer = document.getElementById('compare-result-container');
+const modalOverlay = document.getElementById('modal-overlay');
 
-// 1. AI 서비스 카드 렌더링
+// 1. 메인 소개 카드 렌더링 (체크박스 없음)
 function renderAIServices() {
-  if (!aiServicesGrid) return;
   aiServicesGrid.innerHTML = '';
-  
   aiCategories.forEach((category) => {
-    const categorySection = document.createElement('div');
-    categorySection.className = 'category-section';
-    categorySection.innerHTML = `<h2>${category.name}</h2><p>${category.description}</p>`;
-    aiServicesGrid.appendChild(categorySection);
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.innerHTML = `<h2>${category.name}</h2><p>${category.description}</p>`;
     
-    const serviceGrid = document.createElement('div');
-    serviceGrid.className = 'service-grid';
+    const grid = document.createElement('div');
+    grid.className = 'service-grid';
     
     category.services.forEach((service) => {
-      const card = document.createElement('article');
-      card.className = 'product-card ai-service-card';
-      card.innerHTML = `
-        <div class="image-container">
-          <img src="${service.image}" alt="${service.name}" class="service-image" />
-        </div>
-        <div class="card-content">
-          <div class="service-header">
-            <h3>${service.name}</h3>
-            <div class="rating">⭐ ${service.rating}</div>
+      grid.innerHTML += `
+        <article class="product-card ai-service-card">
+          <div class="image-container">
+            <img src="${service.image}" alt="${service.name}" class="service-image" />
           </div>
-          <p>${service.description}</p>
-          <div class="features">
-            ${service.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+          <div class="card-content">
+            <div class="service-header">
+              <h3>${service.name}</h3>
+            </div>
+            <p>${service.description}</p>
+            <div class="features">
+              ${service.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+            </div>
+            <div class="service-info">
+              <div class="pricing">💰 ${service.pricing.pro}</div>
+            </div>
+            <button class="subscribe-btn" onclick="showModal('${category.id}', '${service.id}')">자세히 보기</button>
           </div>
-          <div class="service-info">
-            <div class="strengths">✅ ${service.strengths}</div>
-            <div class="pricing">💰 ${service.pricing.pro}</div>
-          </div>
-          <button class="subscribe-btn">구독하기</button>
-        </div>
+        </article>
       `;
-
-      // ★ 카드 안의 '구독하기' 버튼을 누르면 팝업(모달) 띄우기 연결!
-      const btn = card.querySelector('.subscribe-btn');
-      btn.addEventListener('click', () => showModal(service));
-      
-      serviceGrid.appendChild(card);
     });
-    
-    aiServicesGrid.appendChild(serviceGrid);
+    section.appendChild(grid);
+    aiServicesGrid.appendChild(section);
   });
 }
 
-// 2. 가격 비교 테이블 렌더링
-function renderPricingComparison() {
-  if (!pricingComparison) return;
-  
-  pricingComparison.innerHTML = `
-    <div class="pricing-comparison-wrapper">
-      <!-- 카테고리 선택 탭 -->
-      <div class="category-tabs">
-        ${aiCategories.map((category, index) => `
-          <button class="category-tab ${index === 0 ? 'active' : ''}" data-category="${category.id}">
-            ${category.name}
-          </button>
-        `).join('')}
+// 2. 가격 비교: 셀렉트 박스 설정
+function setupCompareOptions() {
+  // 카테고리 셋업
+  catSelect.innerHTML = '<option value="">분야를 선택하세요</option>';
+  aiCategories.forEach(cat => {
+    catSelect.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
+  });
+
+  // 카테고리 변경 시 AI 슬롯 1,2 업데이트
+  catSelect.addEventListener('change', (e) => {
+    const catId = e.target.value;
+    resultContainer.style.display = 'none'; // 결과 숨기기
+    
+    if(!catId) {
+      slot1.innerHTML = '<option value="">AI를 선택하세요</option>';
+      slot2.innerHTML = '<option value="">AI를 선택하세요</option>';
+      return;
+    }
+
+    const category = aiCategories.find(c => c.id === catId);
+    let options = '<option value="">AI를 선택하세요</option>';
+    category.services.forEach(s => {
+      options += `<option value="${s.id}">${s.name}</option>`;
+    });
+
+    slot1.innerHTML = options;
+    slot2.innerHTML = options;
+  });
+
+  // AI 선택 시 비교 결과 렌더링
+  slot1.addEventListener('change', renderComparison);
+  slot2.addEventListener('change', renderComparison);
+}
+
+// 3. 두 AI 직접 비교 렌더링 (화면에 바로 표시)
+function renderComparison() {
+  const catId = catSelect.value;
+  const id1 = slot1.value;
+  const id2 = slot2.value;
+
+  if(!catId || !id1 || !id2) {
+    resultContainer.style.display = 'none';
+    return;
+  }
+
+  if(id1 === id2) {
+    alert("서로 다른 AI를 선택해주세요!");
+    slot2.value = "";
+    resultContainer.style.display = 'none';
+    return;
+  }
+
+  const category = aiCategories.find(c => c.id === catId);
+  const ai1 = category.services.find(s => s.id === id1);
+  const ai2 = category.services.find(s => s.id === id2);
+
+  // 화면에 HTML 꽂아넣기
+  resultContainer.innerHTML = `
+    <div class="compare-grid">
+      <!-- 첫번째 AI -->
+      <div class="compare-box">
+        <img src="${ai1.image}" alt="${ai1.name}">
+        <h3>${ai1.name}</h3>
+        <div class="compare-section">
+          <h4>💰 가격</h4>
+          <p>무료: ${ai1.pricing.free} <br> <span class="compare-price">유료: ${ai1.pricing.pro}</span></p>
+        </div>
+        <div class="compare-section">
+          <h4>🟢 이런 점이 좋아요 (장점)</h4>
+          <p class="compare-pro">${ai1.strengths}</p>
+        </div>
+        <div class="compare-section">
+          <h4>🔴 이건 아쉬워요 (단점)</h4>
+          <p class="compare-con">${ai1.weaknesses}</p>
+        </div>
+        <a href="${ai1.subscribeUrl}" target="_blank" class="primary-btn" style="text-align:center; margin-top:auto;">사이트 방문하기</a>
       </div>
-      
-      <!-- AI 선택 그리드 -->
-      <div class="ai-selection-grid">
-        ${aiCategories.map((category, index) => `
-          <div class="category-services ${index === 0 ? 'active' : ''}" data-category="${category.id}">
-            ${category.services.map(service => `
-              <div class="ai-select-card" data-service-id="${service.id}">
-                <div class="ai-select-header">
-                  <img src="${service.image}" alt="${service.name}" class="ai-select-image" />
-                  <div class="ai-select-info">
-                    <h4>${service.name}</h4>
-                    <div class="ai-rating">⭐ ${service.rating}</div>
-                  </div>
-                  <div class="ai-select-checkbox">
-                    <input type="checkbox" id="select-${service.id}" class="ai-checkbox" />
-                    <label for="select-${service.id}" class="checkbox-label"></label>
-                  </div>
-                </div>
-                <div class="ai-select-details">
-                  <div class="ai-pricing">
-                    <div class="price-free">무료: ${service.pricing.free}</div>
-                    <div class="price-pro">프리미엄: ${service.pricing.pro}</div>
-                  </div>
-                  <div class="ai-features">
-                    ${service.features.slice(0, 2).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-                  </div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `).join('')}
-      </div>
-      
-      <!-- 비교 결과 영역 -->
-      <div class="comparison-results" id="comparison-results" style="display: none;">
-        <h3>선택한 AI 서비스 비교</h3>
-        <div class="comparison-content" id="comparison-content"></div>
+
+      <!-- 두번째 AI -->
+      <div class="compare-box">
+        <img src="${ai2.image}" alt="${ai2.name}">
+        <h3>${ai2.name}</h3>
+        <div class="compare-section">
+          <h4>💰 가격</h4>
+          <p>무료: ${ai2.pricing.free} <br> <span class="compare-price">유료: ${ai2.pricing.pro}</span></p>
+        </div>
+        <div class="compare-section">
+          <h4>🟢 이런 점이 좋아요 (장점)</h4>
+          <p class="compare-pro">${ai2.strengths}</p>
+        </div>
+        <div class="compare-section">
+          <h4>🔴 이건 아쉬워요 (단점)</h4>
+          <p class="compare-con">${ai2.weaknesses}</p>
+        </div>
+        <a href="${ai2.subscribeUrl}" target="_blank" class="primary-btn" style="text-align:center; margin-top:auto;">사이트 방문하기</a>
       </div>
     </div>
   `;
   
-  // 카테고리 탭 이벤트 리스너 추가
-  setupCategoryTabs();
-  // AI 선택 체크박스 이벤트 리스너 추가
-  setupAICheckboxes();
+  resultContainer.style.display = 'block';
 }
-        </tbody>
-      </table>
+
+// 4. 메인 카드에서 '자세히 보기' 클릭 시 뜨는 모달
+function showModal(catId, serviceId) {
+  const category = aiCategories.find(c => c.id === catId);
+  const service = category.services.find(s => s.id === serviceId);
+
+  document.getElementById('subscription-content').innerHTML = `
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <h4 style="font-size: 1.4rem; margin: 0 0 0.5rem 0;">${service.name}</h4>
+      <p style="color: var(--muted); margin: 0;">${service.description}</p>
     </div>
-  // 카테고리 탭 이벤트 리스너 추가
-  setupCategoryTabs();
-  // AI 선택 체크박스 이벤트 리스너 추가
-  setupAICheckboxes();
-}
-
-// 카테고리 탭 설정
-function setupCategoryTabs() {
-  const tabs = document.querySelectorAll('.category-tab');
-  const categories = document.querySelectorAll('.category-services');
-  
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // 모든 탭에서 active 클래스 제거
-      tabs.forEach(t => t.classList.remove('active'));
-      // 모든 카테고리에서 active 클래스 제거
-      categories.forEach(c => c.classList.remove('active'));
-      
-      // 클릭한 탭에 active 클래스 추가
-      tab.classList.add('active');
-      // 해당 카테고리에 active 클래스 추가
-      const categoryId = tab.dataset.category;
-      document.querySelector(`.category-services[data-category="${categoryId}"]`).classList.add('active');
-    });
-  });
-}
-
-// AI 체크박스 설정
-function setupAICheckboxes() {
-  const checkboxes = document.querySelectorAll('.ai-checkbox');
-  
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', (e) => {
-      const serviceId = parseInt(e.target.id.replace('select-', ''));
-      const service = findServiceById(serviceId);
-      
-      if (e.target.checked) {
-        if (selectedServices.length >= 2) {
-          // 이미 2개 선택되어 있으면 첫 번째 선택 해제
-          const firstService = selectedServices.shift();
-          document.getElementById(`select-${firstService.id}`).checked = false;
-        }
-        selectedServices.push(service);
-      } else {
-        // 선택 해제
-        const index = selectedServices.findIndex(s => s.id === serviceId);
-        if (index > -1) {
-          selectedServices.splice(index, 1);
-        }
-      }
-      
-      // 비교 결과 업데이트
-      updateComparisonResults();
-    });
-  });
-}
-
-// 서비스 ID로 서비스 찾기
-function findServiceById(id) {
-  for (const category of aiCategories) {
-    const service = category.services.find(s => s.id === id);
-    if (service) return service;
-  }
-  return null;
-}
-
-// 비교 결과 업데이트
-function updateComparisonResults() {
-  const resultsContainer = document.getElementById('comparison-results');
-  const contentContainer = document.getElementById('comparison-content');
-  
-  if (selectedServices.length === 2) {
-    const service1 = selectedServices[0];
-    const service2 = selectedServices[1];
-    
-    const priceParse = (price) => {
-      if (price.includes('$')) {
-        return parseFloat(price.match(/\d+/)[0]);
-      }
-      return 0;
-    };
-    
-    const price1 = priceParse(service1.pricing.pro);
-    const price2 = priceParse(service2.pricing.pro);
-    const priceDiff = Math.abs(price1 - price2);
-    const cheaper = price1 < price2 ? service1.name : service2.name;
-    
-    contentContainer.innerHTML = `
-      <div class="comparison-grid">
-        <!-- 서비스 1 -->
-        <div class="comparison-service">
-          <div class="service-header">
-            <img src="${service1.image}" alt="${service1.name}" class="service-compare-image" />
-            <div>
-              <h4>${service1.name}</h4>
-              <div class="rating">⭐ ${service1.rating}</div>
-            </div>
-          </div>
-          <div class="service-pricing">
-            <div class="price-item">
-              <span class="price-label">무료 플랜:</span>
-              <span class="price-value">${service1.pricing.free}</span>
-            </div>
-            <div class="price-item">
-              <span class="price-label">프리미엄:</span>
-              <span class="price-value price-pro">${service1.pricing.pro}</span>
-            </div>
-          </div>
-          <div class="service-strengths">
-            <h5>✅ 핵심 강점</h5>
-            <p>${service1.strengths}</p>
-          </div>
-          <div class="service-features">
-            <h5>🎯 주요 기능</h5>
-            <div class="features-list">
-              ${service1.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
-            </div>
-          </div>
-          <a href="${service1.subscribeUrl}" target="_blank" class="primary-btn">구독하기</a>
-        </div>
-        
-        <!-- 서비스 2 -->
-        <div class="comparison-service">
-          <div class="service-header">
-            <img src="${service2.image}" alt="${service2.name}" class="service-compare-image" />
-            <div>
-              <h4>${service2.name}</h4>
-              <div class="rating">⭐ ${service2.rating}</div>
-            </div>
-          </div>
-          <div class="service-pricing">
-            <div class="price-item">
-              <span class="price-label">무료 플랜:</span>
-              <span class="price-value">${service2.pricing.free}</span>
-            </div>
-            <div class="price-item">
-              <span class="price-label">프리미엄:</span>
-              <span class="price-value price-pro">${service2.pricing.pro}</span>
-            </div>
-          </div>
-          <div class="service-strengths">
-            <h5>✅ 핵심 강점</h5>
-            <p>${service2.strengths}</p>
-          </div>
-          <div class="service-features">
-            <h5>🎯 주요 기능</h5>
-            <div class="features-list">
-              ${service2.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
-            </div>
-          </div>
-          <a href="${service2.subscribeUrl}" target="_blank" class="primary-btn">구독하기</a>
-        </div>
-      </div>
-      
-      <!-- 가격 비교 요약 -->
-      ${price1 !== price2 ? `
-        <div class="price-comparison-summary">
-          <h4>💰 가격 비교</h4>
-          <p class="price-difference">
-            <strong>${cheaper}</strong>이(가) ${priceDiff}달러 더 저렴합니다
-          </p>
-        </div>
-      ` : ''}
-    `;
-    
-    resultsContainer.style.display = 'block';
-  } else {
-    resultsContainer.style.display = 'none';
-  }
-}
-
-// 5. 모달(팝업) 띄우기 함수
-function showModal(service) {
-function showModal(service) {
-  subscriptionContent.innerHTML = `
-    <div style="padding: 1rem 0;">
-      <div style="text-align: center; margin-bottom: 1.5rem;">
-        <h4 style="font-size: 1.4rem; color: var(--text); margin: 0 0 0.5rem 0;">${service.name}</h4>
-        <p style="color: var(--muted); font-size: 0.9rem; margin: 0;">${service.description}</p>
-      </div>
-      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; border: 1px solid var(--border);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <span style="color: var(--muted);">프리미엄 요금</span>
-          <span style="font-size: 1.25rem; font-weight: bold; color: var(--primary-strong);">${service.pricing.pro}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="color: var(--muted);">무료 플랜</span>
-          <span style="font-weight: 500; font-size: 0.95rem;">${service.pricing.free}</span>
-        </div>
-      </div>
-      <div style="margin-bottom: 1.5rem;">
-        <h5 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 1rem;">✅ 핵심 강점</h5>
-        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0;">${service.strengths}</p>
-      </div>
-      <a href="${service.subscribeUrl}" target="_blank" class="primary-btn" style="display: block; text-align: center; width: 100%; border-radius: 12px; padding: 1rem; text-decoration: none;">지금 바로 구독하기</a>
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+      <p style="margin:0 0 0.5rem 0;"><strong>무료:</strong> ${service.pricing.free}</p>
+      <p style="margin:0; font-size:1.1rem; color:#f87171;"><strong>유료:</strong> ${service.pricing.pro}</p>
     </div>
+    <div style="margin-bottom: 1.5rem;">
+      <h5 style="color: #34d399; margin: 0 0 0.5rem 0;">장점</h5>
+      <p style="color: var(--muted); font-size: 0.9rem;">${service.strengths}</p>
+    </div>
+    <a href="${service.subscribeUrl}" target="_blank" class="primary-btn" style="display:block; text-align:center;">공식 사이트 가기</a>
   `;
-  // HTML 구조의 모달에 open 클래스 추가하여 보여주기
   modalOverlay.classList.add('open');
 }
 
-// 6. 모달 닫기 이벤트 (X 버튼 & 바깥 배경 클릭)
-if (closeModalBtn) {
-  closeModalBtn.addEventListener('click', () => {
-    modalOverlay.classList.remove('open');
-  });
-}
+// 모달 닫기
+document.getElementById('close-modal').addEventListener('click', () => modalOverlay.classList.remove('open'));
+modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) modalOverlay.classList.remove('open'); });
 
-if (modalOverlay) {
-  modalOverlay.addEventListener('click', (e) => {
-    // 배경(자신)을 클릭했을 때만 닫기 (내부 내용 클릭 시 안 닫힘)
-    if (e.target === modalOverlay) {
-      modalOverlay.classList.remove('open');
-    }
-  });
-}
-
-// 6. 헤더 메뉴 토글 (모바일용)
-if (menuToggle && mainNav) {
-if (menuToggle && mainNav) {
-  menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('open');
-  });
-  mainNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => mainNav.classList.remove('open'));
-  });
-}
-
-// 9. 헤더 우측 '구독 시작하기' 버튼 누르면 비교 섹션으로 스크롤 이동
-if (topSubBtn) {
-  topSubBtn.addEventListener('click', () => {
-    document.getElementById('comparison').scrollIntoView({ behavior: 'smooth' });
-  });
-}
-
-// 10. 추천 카드 클릭 이벤트 - 해당 카테고리로 이동
-document.querySelectorAll('.rec-card').forEach(card => {
-  card.style.cursor = 'pointer';
-  card.addEventListener('click', () => {
-    const category = card.dataset.category;
-    document.getElementById('comparison').scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// 초기 렌더링 실행
+// 실행
 renderAIServices();
-renderPricingComparison();
+setupCompareOptions();

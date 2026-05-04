@@ -11,13 +11,11 @@
   <header class="site-header">
     <div class="header-inner container">
       <div class="brand">AI Compare</div>
-      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기">
-        ☰
-      </button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기">☰</button>
       <nav class="main-nav" id="main-nav">
         <a href="#home">홈</a>
-        <a href="#comparison">서비스 비교</a>
-        <a href="#pricing">가격 비교</a>
+        <a href="#comparison">서비스 소개</a>
+        <a href="#pricing">AI 맞춤 비교</a>
         <a href="#recommend">추천</a>
       </nav>
       <button class="cart-button" id="subscription-btn">구독 시작하기</button>
@@ -25,79 +23,106 @@
   </header>
 
   <main>
+    <!-- 홈 섹션 -->
     <section class="hero" id="home">
       <div class="hero-copy container">
         <p class="eyebrow">AI 구독 서비스 비교</p>
         <h1>어떤 AI가<br>당신에게 맞을까요?</h1>
-        <p>ChatGPT, Claude, Gemini 등 인기 AI 서비스의 특징, 가격, 성능을 비교하고<br>최적의 구독 플랜을 찾아보세요. 전문가 리뷰와 사용자 평가로<br>스마트한 선택을 도와드립니다.</p>
-        <a class="primary-btn" href="#comparison">지금 비교하기</a>
+        <p>ChatGPT, Claude, Gemini 등 인기 AI 서비스의 특징, 가격, 성능을 비교하고<br>최적의 구독 플랜을 찾아보세요.</p>
+        <a class="primary-btn" href="#pricing">직접 비교해보기</a>
       </div>
       <div class="hero-image">
         <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="AI Technology" />
       </div>
     </section>
 
-    <section class="features container">
-      <article>
-        <h3>📊 객관적 비교</h3>
-        <p>각 AI 서비스의 장단점, 사용성, 성능을<br>전문가의 시각으로 분석해드립니다</p>
-      </article>
-      <article>
-        <h3>💰 가격 최적화</h3>
-        <p>무료 플랜부터 프리미엄까지<br>가장 경제적인 구독 플랜을 추천합니다</p>
-      </article>
-      <article>
-        <h3>🔗 바로 구독</h3>
-        <p>비교 후 바로 해당 서비스로 이동하여<br>간편하게 구독을 시작하세요</p>
-      </article>
-    </section>
-
-    <section class="info-block container" id="recommend">
-      <div>
-        <h2>어떤 AI가<br>필요하신가요?</h2>
-        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다.<br>텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서<br>최고의 AI를 만나보세요.</p>
-        <div class="recommendation-cards">
-          <div class="rec-card" data-category="text-code">
-            <h4>✍️ 텍스트 작업</h4>
-            <p>글쓰기, 번역, 요약, 분석</p>
-            <small>ChatGPT, Claude, Gemini 추천</small>
-          </div>
-          <div class="rec-card" data-category="image">
-            <h4>🎨 이미지 생성</h4>
-            <p>디자인, 일러스트, 사진 편집</p>
-            <small>Midjourney, DALL-E, Stable Diffusion</small>
-          </div>
-          <div class="rec-card" data-category="text-code">
-            <h4>💻 개발 지원</h4>
-            <p>코딩, 디버깅, 코드 리뷰</p>
-            <small>GitHub Copilot, Tabnine</small>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- 서비스 소개 카드 섹션 (체크박스 제거됨) -->
     <section class="product-list container" id="comparison">
       <div class="section-header">
-        <h2>AI 서비스 비교</h2>
-        <p>주요 AI 구독 서비스의 특징과 장단점을 비교해보세요. 두 개를 선택하면 상세 비교가 가능합니다.</p>
+        <h2>AI 서비스 한눈에 보기</h2>
+        <p>분야별로 어떤 AI들이 있는지 둘러보세요.</p>
       </div>
       <div class="products" id="ai-services-grid"></div>
     </section>
 
+    <!-- ★ 새로 만든 AI 맞춤 비교 섹션 ★ -->
     <section class="pricing-table container" id="pricing">
       <div class="section-header">
-        <h2>가격 비교</h2>
-        <p>각 서비스의 구독 요금제를 한눈에 비교하세요.</p>
+        <h2>AI 맞춤 비교</h2>
+        <p>카테고리를 선택하고, 두 개의 AI를 골라 장단점과 가격을 직접 비교해보세요.</p>
       </div>
+      
+      <div class="compare-ui-container">
+        <!-- 1. 분야(카테고리) 선택 -->
+        <div class="select-group full-width">
+          <label for="compare-category">1. 비교할 분야를 선택하세요</label>
+          <div class="select-wrapper">
+            <select id="compare-category" class="custom-select"></select>
+          </div>
+        </div>
+
+        <!-- 2. AI 2개 선택 슬롯 -->
+        <div class="compare-slots">
+          <div class="select-group">
+            <label for="compare-slot-1">첫 번째 AI</label>
+            <div class="select-wrapper">
+              <select id="compare-slot-1" class="custom-select">
+                <option value="">AI를 선택하세요</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="vs-badge">VS</div>
+          
+          <div class="select-group">
+            <label for="compare-slot-2">두 번째 AI</label>
+            <div class="select-wrapper">
+              <select id="compare-slot-2" class="custom-select">
+                <option value="">AI를 선택하세요</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 비교 결과 화면 (JS로 내용이 채워짐) -->
+        <div id="compare-result-container" class="compare-result-container" style="display: none;">
+          <!-- 비교 결과가 여기에 들어갑니다 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 추천 섹션 -->
+    <section class="info-block container" id="recommend">
+      <div class="section-header">
+        <h2>어떤 AI가 필요하신가요?</h2>
+        <p>목적에 맞는 최고의 AI를 추천해드립니다.</p>
+      </div>
+      <div class="recommendation-cards">
+        <div class="rec-card" onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });">
+          <h4>✍️ 텍스트/기획</h4>
+          <p>글쓰기, 번역, 요약, 기획서 작성</p>
+          <small>ChatGPT, Claude 추천</small>
+        </div>
+        <div class="rec-card" onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });">
+          <h4>📊 PPT/프레젠테이션</h4>
+          <p>자동 슬라이드 생성, 디자인 제안</p>
+          <small>Gamma, Beautiful.ai 추천</small>
+        </div>
+        <div class="rec-card" onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });">
+          <h4>💻 코딩/개발</h4>
+          <p>코드 자동완성, 디버깅, 리뷰</p>
+          <small>GitHub Copilot 추천</small>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- 교체된 모달(팝업) 영역 -->
+  <!-- 구독하기 버튼 클릭 시 뜨는 모달(팝업) 영역 -->
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-window">
       <div class="subscription-header">
         <div class="panel-title">
-          <h3>구독 상세 정보</h3>
-          <p>선택한 AI 서비스의 자세한 정보를 확인하세요</p>
+          <h3>상세 정보</h3>
         </div>
         <button id="close-modal" class="close-btn" aria-label="닫기">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -106,19 +131,13 @@
           </svg>
         </button>
       </div>
-      <div class="subscription-content" id="subscription-content">
-        <!-- 스크립트를 통해 내용이 동적으로 들어갑니다 -->
-      </div>
+      <div class="subscription-content" id="subscription-content"></div>
     </div>
   </div>
 
   <footer class="site-footer" id="contact">
     <div class="container footer-inner">
-      <p>© 2026 AI Compare. AI 서비스 비교 및 추천 플랫폼</p>
-      <div class="footer-links">
-        <a href="https://github.com/sangyeop1001/ai-coding" target="_blank" rel="noopener noreferrer">GitHub 저장소</a>
-        <a href="https://ai-coding-tau.vercel.app/" target="_blank" rel="noopener noreferrer">사이트 바로가기</a>
-      </div>
+      <p>© 2026 AI Compare. AI 서비스 비교 플랫폼</p>
     </div>
   </footer>
 
