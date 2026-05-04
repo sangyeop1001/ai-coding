@@ -52,10 +52,34 @@
       </article>
     </section>
 
+    <section class="info-block container" id="recommend">
+      <div>
+        <h2>어떤 AI가<br>필요하신가요?</h2>
+        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다.<br>텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서<br>최고의 AI를 만나보세요.</p>
+        <div class="recommendation-cards">
+          <div class="rec-card" data-category="text-code">
+            <h4>✍️ 텍스트 작업</h4>
+            <p>글쓰기, 번역, 요약, 분석</p>
+            <small>ChatGPT, Claude, Gemini 추천</small>
+          </div>
+          <div class="rec-card" data-category="image">
+            <h4>🎨 이미지 생성</h4>
+            <p>디자인, 일러스트, 사진 편집</p>
+            <small>Midjourney, DALL-E, Stable Diffusion</small>
+          </div>
+          <div class="rec-card" data-category="text-code">
+            <h4>💻 개발 지원</h4>
+            <p>코딩, 디버깅, 코드 리뷰</p>
+            <small>GitHub Copilot, Tabnine</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="product-list container" id="comparison">
       <div class="section-header">
         <h2>AI 서비스 비교</h2>
-        <p>주요 AI 구독 서비스의 특징과 장단점을 비교해보세요.</p>
+        <p>주요 AI 구독 서비스의 특징과 장단점을 비교해보세요. 두 개를 선택하면 상세 비교가 가능합니다.</p>
       </div>
       <div class="products" id="ai-services-grid"></div>
     </section>
@@ -65,33 +89,29 @@
         <h2>가격 비교</h2>
         <p>각 서비스의 구독 요금제를 한눈에 비교하세요.</p>
       </div>
-      <div class="pricing-grid" id="pricing-comparison"></div>
-    </section>
-
-    <section class="info-block container" id="recommend">
-      <div>
-        <h2>어떤 AI가<br>필요하신가요?</h2>
-        <p>사용 목적에 따라 최적의 AI 서비스를 추천해드립니다.<br>텍스트 생성, 이미지 생성, 코딩 지원 등 다양한 분야에서<br>최고의 AI를 만나보세요.</p>
-        <div class="recommendation-cards">
-          <div class="rec-card">
-            <h4>✍️ 텍스트 작업</h4>
-            <p>글쓰기, 번역, 요약, 분석</p>
-            <small>ChatGPT, Claude, Gemini 추천</small>
-          </div>
-          <div class="rec-card">
-            <h4>🎨 이미지 생성</h4>
-            <p>디자인, 일러스트, 사진 편집</p>
-            <small>Midjourney, DALL-E, Stable Diffusion</small>
-          </div>
-          <div class="rec-card">
-            <h4>💻 개발 지원</h4>
-            <p>코딩, 디버깅, 코드 리뷰</p>
-            <small>GitHub Copilot, Tabnine</small>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
+
+  <!-- 비교 모달 -->
+  <div id="compare-overlay" class="modal-overlay">
+    <div class="modal-window">
+      <div class="subscription-header">
+        <div class="panel-title">
+          <h3>AI 서비스 상세 비교</h3>
+          <p>선택한 두 AI의 차이점을 비교하세요</p>
+        </div>
+        <button id="close-compare" class="close-btn" aria-label="닫기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div id="comparison-content" class="subscription-content">
+        <!-- 비교 내용이 여기에 들어갑니다 -->
+      </div>
+    </div>
+  </div>
 
   <!-- 교체된 모달(팝업) 영역 -->
   <div id="modal-overlay" class="modal-overlay">
