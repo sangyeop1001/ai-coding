@@ -60,6 +60,12 @@ const aiCategories = [
         subscribeUrl: 'https://www.midjourney.com/', rating: 4.9
       },
       {
+        id: 8, name: 'DALL-E 3', description: 'OpenAI의 이미지 생성 AI. 텍스트로부터 정확한 이미지 생성.',
+        features: ['정확한 이미지 생성', '편집 기능', 'API 지원'], strengths: '텍스트-이미지 변환 정확도 높음',
+        pricing: { free: '크레딧', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png',
+        subscribeUrl: 'https://openai.com/dall-e-3/', rating: 4.6
+      },
+      {
         id: 10, name: 'Stable Diffusion', description: '오픈소스 이미지 생성 모델. 커스터마이징과 로컬 실행 지원.',
         features: ['오픈소스', '로컬 실행', '모델 커스터마이즈', '빠른 생성'], strengths: '자유도가 높고 가격 부담이 적음',
         pricing: { free: '오픈소스', pro: '맞춤형 요금' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Stable_Diffusion_logo.svg/200px-Stable_Diffusion_logo.svg.png',
@@ -70,12 +76,6 @@ const aiCategories = [
         features: ['비디오 편집', '모션 그래픽', '이미지 생성', '브랜딩 템플릿'], strengths: '영상 제작 워크플로우에 바로 적용 가능',
         pricing: { free: '제한적', pro: '$12/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Runway_%28software%29_logo.svg/200px-Runway_%28software%29_logo.svg.png',
         subscribeUrl: 'https://runwayml.com/', rating: 4.4
-      },
-      {
-        id: 8, name: 'DALL-E 3', description: 'OpenAI의 이미지 생성 AI. 텍스트로부터 정확한 이미지 생성.',
-        features: ['정확한 이미지 생성', '편집 기능', 'API 지원'], strengths: '텍스트-이미지 변환 정확도 높음',
-        pricing: { free: '크레딧', pro: '$20/월' }, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/200px-ChatGPT_logo.svg.png',
-        subscribeUrl: 'https://openai.com/dall-e-3/', rating: 4.6
       }
     ]
   }
