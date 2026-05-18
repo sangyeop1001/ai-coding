@@ -220,6 +220,32 @@ document.getElementById('subscription-btn').addEventListener('click', () => {
   document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
 });
 
+// 테마 토글 기능
+function initTheme() {
+  const themeSwitch = document.getElementById('theme-switch');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  
+  // 초기 테마 설정
+  setTheme(savedTheme);
+  themeSwitch.checked = savedTheme === 'light';
+  
+  // 토글 이벤트 리스너
+  themeSwitch.addEventListener('change', (e) => {
+    const theme = e.target.checked ? 'light' : 'dark';
+    setTheme(theme);
+    localStorage.setItem('theme', theme);
+  });
+}
+
+function setTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+}
+
 // 실행
 renderAIServices();
 setupCompareOptions();
+initTheme();
