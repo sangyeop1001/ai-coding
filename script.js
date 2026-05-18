@@ -38,50 +38,10 @@ const aiCategories = [
 ];
 
 // DOM 요소
-const aiServicesGrid = document.getElementById('ai-services-grid');
 const catSelect = document.getElementById('compare-category');
 const slot1 = document.getElementById('compare-slot-1');
 const slot2 = document.getElementById('compare-slot-2');
 const resultContainer = document.getElementById('compare-result-container');
-const modalOverlay = document.getElementById('modal-overlay');
-
-// 1. 메인 소개 카드 렌더링 (체크박스 없음)
-function renderAIServices() {
-  aiServicesGrid.innerHTML = '';
-  aiCategories.forEach((category) => {
-    const section = document.createElement('div');
-    section.className = 'category-section';
-    section.innerHTML = `<h2>${category.name}</h2><p>${category.description}</p>`;
-    
-    const grid = document.createElement('div');
-    grid.className = 'service-grid';
-    
-    category.services.forEach((service) => {
-      grid.innerHTML += `
-        <article class="product-card ai-service-card">
-          <div class="image-container">
-            <img src="${service.image}" alt="${service.name}" class="service-image" onerror="this.src='https://via.placeholder.com/150?text=AI+Logo'"/>
-          </div>
-          <div class="card-content">
-            <div class="service-header">
-              <h3>${service.name}</h3>
-            </div>
-            <p>${service.description}</p>
-            <div class="features">
-              ${service.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
-            </div>
-            <div class="service-info">
-              <div class="pricing">💰 ${service.pricing.pro}</div>
-            </div>
-            <button class="subscribe-btn" onclick="showModal('${category.id}', '${service.id}')">자세히 보기</button>
-          </div>
-        </article>
-      `;
-    });
-    section.appendChild(grid);
-    aiServicesGrid.appendChild(section);
-  });
-}
 
 // 2. 가격 비교: 셀렉트 박스 설정
 function setupCompareOptions() {
@@ -178,37 +138,6 @@ function renderComparison() {
   resultContainer.style.display = 'block';
 }
 
-// 4. 메인 카드에서 '자세히 보기' 클릭 시 뜨는 모달
-function showModal(catId, serviceId) {
-  const category = aiCategories.find(c => c.id === catId);
-  const service = category.services.find(s => s.id === serviceId);
-
-  document.getElementById('subscription-content').innerHTML = `
-    <div style="text-align: center; margin-bottom: 1.5rem;">
-      <h4 style="font-size: 1.4rem; margin: 0 0 0.5rem 0;">${service.name}</h4>
-      <p style="color: var(--muted); margin: 0;">${service.description}</p>
-    </div>
-    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
-      <p style="margin:0 0 0.5rem 0;"><strong>무료 지원:</strong> ${service.pricing.free}</p>
-      <p style="margin:0; font-size:1.1rem; color:#f87171;"><strong>유료 플랜:</strong> ${service.pricing.pro}</p>
-    </div>
-    <div style="margin-bottom: 1.5rem;">
-      <h5 style="color: #34d399; margin: 0 0 0.5rem 0;">🟢 가장 큰 장점</h5>
-      <p style="color: var(--muted); font-size: 0.9rem;">${service.strengths}</p>
-    </div>
-    <div style="margin-bottom: 1.5rem;">
-      <h5 style="color: #fbbf24; margin: 0 0 0.5rem 0;">🔴 아쉬운 점</h5>
-      <p style="color: var(--muted); font-size: 0.9rem;">${service.weaknesses}</p>
-    </div>
-    <a href="${service.subscribeUrl}" target="_blank" class="primary-btn" style="display:block; text-align:center;">공식 사이트 가기</a>
-  `;
-  modalOverlay.classList.add('open');
-}
-
-// 모달 및 메뉴 닫기 로직
-document.getElementById('close-modal').addEventListener('click', () => modalOverlay.classList.remove('open'));
-modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) modalOverlay.classList.remove('open'); });
-
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
 if (menuToggle && mainNav) {
@@ -246,6 +175,5 @@ function setTheme(theme) {
 }
 
 // 실행
-renderAIServices();
 setupCompareOptions();
 initTheme();

@@ -136,6 +136,11 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
 .hero-image img { width: 100%; max-width: 300px; border-radius: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
 .hero-copy h1 { font-size: 3.2rem; font-weight: 800; margin: 1rem 0; }
 .hero-copy p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto 2rem auto; }
+.header-actions { display: flex; align-items: center; gap: 1rem; }
+.service-intro-content { max-width: 860px; margin: 0 auto; padding-top: 1rem; }
+.service-list { list-style: none; padding: 0; margin: 1.5rem 0 0 0; display: grid; gap: 1rem; }
+.service-list li { position: relative; padding-left: 1.5rem; color: var(--muted); line-height: 1.7; }
+.service-list li::before { content: '✔'; position: absolute; left: 0; top: 0; color: var(--primary); }
 
 .section-header { text-align: center; margin-bottom: 3.5rem; }
 .section-header h2 { font-size: 2.5rem; margin: 0 0 1rem 0; }
@@ -255,24 +260,6 @@ main > section { padding: 6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0
 .rec-card small { color: var(--primary); }
 
 .site-footer { text-align: center; padding: 2rem 0; border-top: 1px solid var(--border); color: var(--muted); }
-
-/* 모달 */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
-.modal-overlay.open { opacity: 1; visibility: visible; }
-.modal-window { background: #121214; width: 90%; max-width: 420px; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; transform: scale(0.95); transition: 0.3s; }
-
-:root[data-theme="light"] .modal-window {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.modal-overlay.open .modal-window { transform: scale(1); }
-.subscription-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem;}
-.close-btn { background: none; border: none; color: white; cursor: pointer; }
-
-:root[data-theme="light"] .close-btn {
-  color: #1a202c;
-}
 
 /* 모바일 화면일 때만 메뉴 토글 버튼 표시 */
 @media (max-width: 768px) {
